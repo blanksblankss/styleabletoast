@@ -11,7 +11,7 @@
     <style name="allStyles">
         <item name="textBold">true</item>
         <item name="textColor">#ff003b</item>
-        <item name="textFont">fonts/dosis.otf</item>
+        <item name="textFont">@font/a</item>
         <item name="textSize">16sp</item>
         <item name="colorBackground">#d1cece</item>
         <item name="solidBackground">true</item>
@@ -23,6 +23,7 @@
     </style>
 
     <style name="style2">
+        <item name="textFont">@font/a</item>
         <item name="textColor">#ffffff</item>
         <item name="colorBackground">#5c7299</item>
     </style>

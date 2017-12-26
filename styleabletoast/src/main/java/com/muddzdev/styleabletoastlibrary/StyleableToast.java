@@ -10,9 +10,11 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.FontRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
@@ -49,6 +51,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
     private int iconResLeft;
     private int iconResRight;
     private int textColor;
+    private int fontId;
     private int length;
     private int style;
     private float textSize;
@@ -102,6 +105,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         this.textSize = builder.textSize;
         this.textBold = builder.textBold;
         this.typeface = builder.typeface;
+        this.fontId = builder.fontId;
         this.text = builder.text;
         this.length = builder.length;
     }
@@ -157,8 +161,13 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         this.textSize = textSize;
     }
 
+    @Deprecated
     public void setTypeface(Typeface typeface) {
         this.typeface = typeface;
+    }
+
+    public void setFontId(@FontRes int fontId) {
+        this.fontId = fontId;
     }
 
     public void setBackgroundColor(@ColorInt int backgroundColor) {
@@ -190,9 +199,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         this.iconResRight = iconResRight;
     }
 
-    /**
-     * Enables spinning animation of the passed iconResLeft by its around its own center.
-     */
     @Deprecated
     public void spinIcon() {
         this.hasAnimation = true;
@@ -267,6 +273,8 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             textView.setTypeface(Typeface.create(typeface, Typeface.BOLD));
         } else if (typeface != null) {
             textView.setTypeface(typeface);
+        } else if (fontId > 0) {
+            textView.setTypeface(ResourcesCompat.getFont(context, fontId));
         }
     }
 
@@ -322,12 +330,14 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
         isTextSizeFromStyle = textSize > 0;
 
-        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
-        if (textFontPath != null) {
-            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
-                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
-            }
-        }
+        fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
+
+//        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
+//        if (textFontPath != null) {
+//            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
+//                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
+//            }
+//        }
     }
 
 
@@ -375,6 +385,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         private int iconResLeft;
         private int iconResRight;
         private int textColor;
+        private int fontId;
         private int length;
         private float textSize;
         private boolean solidBackground;
@@ -408,8 +419,17 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             return this;
         }
 
+        /**
+         * Use the new method {@link #font(int)} instead
+         */
+        @Deprecated
         public Builder typeface(Typeface typeface) {
             this.typeface = typeface;
+            return this;
+        }
+
+        public Builder font(@FontRes int font) {
+            this.fontId = font;
             return this;
         }
 

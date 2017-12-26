@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
@@ -38,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.button3:
 
+//                Typeface typeface = ResourcesCompat.getFont(this, R.font.a);
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.lobst);
+
                 new StyleableToast
                         .Builder(this)
+                        .typeface(typeface)
                         .text("Turn off flight mode")
                         .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
                         .backgroundColor(Color.parseColor("#865aff"))
@@ -53,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                         .Builder(this)
                         .text("Updating profile")
                         .textColor(Color.WHITE)
+                        .font(R.font.lobst)
                         .backgroundColor(Color.parseColor("#ff5a5f"))
                         .iconResLeft(R.drawable.ic_autorenew_black_24dp)
                         .show();
@@ -65,23 +72,22 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast
                         .Builder(this)
                         .text("Milk added to list")
+                        .spinIcon()
+                        .font(R.font.dosis)
                         .backgroundColor(Color.parseColor("#74ba82"))
                         .show();
+
+
                 break;
 
             case R.id.button6:
-
-                int width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, getResources().getDisplayMetrics());
-                int color = Color.parseColor("#c9c9c9");
 
                 new StyleableToast
                         .Builder(this)
                         .text("Picture saved to gallery")
                         .textColor(Color.parseColor("#fc2d3e"))
-                        .textBold()
-                        .stroke(width,color)
-                        .typeface(Typeface.createFromAsset(getAssets(), "fonts/dosis.otf"))
-                            .backgroundColor(Color.parseColor("#dddddd"))
+                        .font(R.font.a)
+                        .backgroundColor(Color.parseColor("#dddddd"))
                         .show();
                 break;
         }

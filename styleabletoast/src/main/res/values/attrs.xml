@@ -4,7 +4,8 @@
     <declare-styleable name="StyleableToast">
         <attr name="textBold" format="boolean" />
         <attr name="textColor" format="color" />
-        <attr name="textFont" format="string" />
+        <!--<attr name="textFont" format="string" />-->
+        <attr name="textFont" format="reference" />
         <attr name="textSize" format="dimension" />
         <attr name="colorBackground" format="color" />
         <attr name="solidBackground" format="boolean" />
