@@ -73,14 +73,10 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         return new StyleableToast(context, text, length, style);
     }
 
-    /**
-     * Default length is SHORT If length isn't set in the styles.xml
-     */
     public static StyleableToast makeText(@NonNull Context context, String text, @StyleRes int style) {
         return new StyleableToast(context, text, Toast.LENGTH_SHORT, style);
     }
 
-    //For styles.xml
     private StyleableToast(@NonNull Context context, String text, int length, @StyleRes int style) {
         super(context);
         this.context = context;
@@ -89,7 +85,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         this.style = style;
     }
 
-    //For builder pattern.
     private StyleableToast(StyleableToast.Builder builder) {
         super(builder.context);
         this.context = builder.context.getApplicationContext();
@@ -135,83 +130,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         }
     }
 
-
-    /**
-     * Style your StyleableToast via styles.xml. Any styles set in the styles.xml will override current attributes.
-     *
-     * @param style style resId.
-     */
-    public void setStyle(@StyleRes int style) {
-        this.style = style;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setTextColor(@ColorInt int textColor) {
-        this.textColor = textColor;
-    }
-
-    public void setTextBold() {
-        this.textBold = true;
-    }
-
-    public void setTextSize(float textSize) {
-        this.textSize = textSize;
-    }
-
-    @Deprecated
-    public void setTypeface(Typeface typeface) {
-        this.typeface = typeface;
-    }
-
-    public void setFontId(@FontRes int fontId) {
-        this.fontId = fontId;
-    }
-
-    public void setBackgroundColor(@ColorInt int backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    public void setSolidBackground() {
-        this.solidBackground = true;
-    }
-
-    public void setStroke(int strokeWidth, @ColorInt int strokeColor) {
-        this.strokeWidth = strokeWidth;
-        this.strokeColor = strokeColor;
-    }
-
-    /**
-     * @param cornerRadius Sets the corner radius of the StyleableToast's shape.
-     */
-    public void setCornerRadius(int cornerRadius) {
-        this.cornerRadius = cornerRadius;
-    }
-
-
-    public void setIconResLeft(@DrawableRes int iconResLeft) {
-        this.iconResLeft = iconResLeft;
-    }
-
-    public void setIconResRight(@DrawableRes int iconResRight) {
-        this.iconResRight = iconResRight;
-    }
-
-    @Deprecated
-    public void spinIcon() {
-        this.hasAnimation = true;
-    }
-
-    /**
-     * @param length {@link Toast#LENGTH_SHORT} or {@link Toast#LENGTH_LONG}
-     */
-
-    public void setLength(int length) {
-        this.length = length;
-    }
-
     public void show() {
         initStyleableToast();
         styleableToast = new Toast(context);
@@ -232,26 +150,21 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
     }
 
 
-    // ----------------------- PUBLIC METHODS ENDS -----------------------
-
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground();
         gradientDrawable.setCornerRadius(cornerRadius != -1 ? cornerRadius : R.dimen.default_corner_radius);
         gradientDrawable.setStroke(strokeWidth, strokeColor);
-
         if (backgroundColor == 0) {
             gradientDrawable.setColor(ContextCompat.getColor(context, R.color.defaultBackgroundColor));
         } else {
             gradientDrawable.setColor(backgroundColor);
         }
-
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
         } else {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
         }
-
 
         rootLayout.setBackground(gradientDrawable);
     }
@@ -273,6 +186,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             textView.setTypeface(Typeface.create(typeface, Typeface.BOLD));
         } else if (typeface != null) {
             textView.setTypeface(typeface);
+            //TODO THIS CHECK IS DEPRECATED AND WILL BE DELETED SOON
         } else if (fontId > 0) {
             textView.setTypeface(ResourcesCompat.getFont(context, fontId));
         }
@@ -329,15 +243,14 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         textBold = typedArray.getBoolean(R.styleable.StyleableToast_textBold, false);
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
         isTextSizeFromStyle = textSize > 0;
-
         fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
 
-//        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
-//        if (textFontPath != null) {
-//            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
-//                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
-//            }
-//        }
+        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
+        if (textFontPath != null) {
+            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
+                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
+            }
+        }
     }
 
 
@@ -373,8 +286,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         }
     }
 
-
-//--------------------BUILDER--------------------
 
     public static class Builder {
 
@@ -420,7 +331,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         }
 
         /**
-         * Use the new method {@link #font(int)} instead
+         * Use the new method {@link #font(int)} instead.
          */
         @Deprecated
         public Builder typeface(Typeface typeface) {
@@ -428,6 +339,9 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             return this;
         }
 
+        /**
+         * @param font A font resource id like R.font.somefont as introduced with the new font api in Android 8
+         */
         public Builder font(@FontRes int font) {
             this.fontId = font;
             return this;

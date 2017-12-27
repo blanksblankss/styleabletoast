@@ -1,26 +1,17 @@
 package com.muddzdev.styleabletoast;
 
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
-import java.lang.reflect.Type;
-
-import static android.util.TypedValue.COMPLEX_UNIT_SP;
-
 public class MainActivity extends AppCompatActivity {
-
-    private StyleableToast styleableToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.button3:
-
-//                Typeface typeface = ResourcesCompat.getFont(this, R.font.a);
-                Typeface typeface = ResourcesCompat.getFont(this, R.font.lobst);
-
+                Typeface typeface = ResourcesCompat.getFont(this, R.font.toastfont);
                 new StyleableToast
                         .Builder(this)
                         .typeface(typeface)
@@ -59,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
                         .Builder(this)
                         .text("Updating profile")
                         .textColor(Color.WHITE)
-                        .font(R.font.lobst)
                         .backgroundColor(Color.parseColor("#ff5a5f"))
                         .iconResLeft(R.drawable.ic_autorenew_black_24dp)
                         .show();
@@ -68,11 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.button5:
-                int strokeWidth2 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, getResources().getDisplayMetrics());
                 new StyleableToast
                         .Builder(this)
                         .text("Milk added to list")
-                        .spinIcon()
                         .font(R.font.dosis)
                         .backgroundColor(Color.parseColor("#74ba82"))
                         .show();
@@ -81,20 +66,13 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.button6:
-
                 new StyleableToast
                         .Builder(this)
                         .text("Picture saved to gallery")
                         .textColor(Color.parseColor("#fc2d3e"))
-                        .font(R.font.a)
                         .backgroundColor(Color.parseColor("#dddddd"))
                         .show();
                 break;
-        }
-
-        if (styleableToast != null) {
-            styleableToast.show();
-            styleableToast = null;
         }
     }
 }
