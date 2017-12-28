@@ -26,7 +26,7 @@ Read the changes from `1.0.9` To `2.0.1` before updating!
 <img src="https://github.com/Muddz/StyleableToast/blob/master/cases.png" width="80%">
 
 
-## Exampple with a style from styles.xml
+## Example with a style from styles.xml
 
 1) Define a style. All available attributes:
 ```xml
