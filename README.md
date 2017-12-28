@@ -28,7 +28,7 @@ An Android library that takes the standard Android toast to the next level with 
 
 ## Style a toast from styles.xml
 
-1) Define a styles. All available attributes:
+1) Define a style. All available attributes:
 ```xml
     <style name="mytoast">
         <item name="textBold">true</item>
