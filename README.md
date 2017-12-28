@@ -6,9 +6,9 @@
 An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml!
 
 
-## Update version: 2.0.1  **IMPORTANT** |  18 December 2017
+## Release note version: 2.0.1  **IMPORTANT** |  18 December 2017
+Read the changes from `1.0.9` To `2.0.1` before updating!
 
-!! READ THE CHANGES FROM `1.0.9` TO `2.0.1` BEFORE UPDATING
 - replaced alpha() with solidBackground()
 - replaced strokeWidth() and strokeColor() with stroke(width,color)
 - Removed getToast() and build()
@@ -26,7 +26,7 @@ An Android library that takes the standard Android toast to the next level with 
 <img src="https://github.com/Muddz/StyleableToast/blob/master/cases.png" width="80%">
 
 
-## Style a toast from styles.xml
+## Exampple with a style from styles.xml
 
 1) Define a style. All available attributes:
 ```xml
@@ -47,13 +47,13 @@ An Android library that takes the standard Android toast to the next level with 
 
 ```
 
-2) Pass your style in the static constructor and call show(); and you're done!
+2) Pass your style in the static constructor and call `show();` and you're done!
 
 ```java
     StyleableToast.makeText(context, "Hello World!", R.style.mytoast).show();
 ```
 
-## With Builder pattern:
+## Example with builder pattern:
 ```java
         new StyleableToast
                 .Builder(context)
