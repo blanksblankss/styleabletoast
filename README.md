@@ -3,7 +3,7 @@
 [![LICENSE](https://img.shields.io/badge/License-Apache--2.0-brightgreen.svg)](https://github.com/Muddz/StyleableToast/blob/master/LICENSE)
 [![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/Muddz/StyleableToast/raw/master/demo.apk)
 
-An Android library that takes the standard Android Toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your Toast either by code or in styles.xml!
+An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml!
 
 
 ## Update version: 2.0.1  **IMPORTANT** |  18 December 2017
@@ -28,7 +28,7 @@ An Android library that takes the standard Android Toast to the next level with 
 
 ## Style a toast from styles.xml
 
-1) Define your styles. All available attributes:
+1) Define a styles. All available attributes:
 ```xml
     <style name="mytoast">
         <item name="textBold">true</item>
