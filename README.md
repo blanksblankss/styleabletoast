@@ -20,17 +20,18 @@ An Android library that takes the standard Android Toast to the next level with 
 - Works from Api 16+
 
 
-## Update version: 2.0.0  **IMPORTANT** |  18 December 2017
+## Update version: 2.0.1  **IMPORTANT** |  18 December 2017
 
-!! READ THE CHANGES FROM `1.0.9` TO `2.0.0` BEFORE UPDATING
-- replaced setAlpha() with setSolidBackground()
-- replaced setStrokeWidth() and setStrokeColor() with setStroke(width,color)
+!! READ THE CHANGES FROM `1.0.9` TO `2.0.1` BEFORE UPDATING
+- replaced alpha() with solidBackground()
+- replaced strokeWidth() and strokeColor() with stroke(width,color)
 - Removed getToast() and build()
 - Removed 4 lines text limit
-- added setIconLeft() & setIconRight()
-- added setTextSize()
+- added iconLeft() & iconRight()
+- added textSize()
+- deprecated typeface(). Use font() with the new Font api in Android 8 -> R.font.xx
 - added new custom styles.xml attribute. See below!
-- added new makeText() constructor without length
+- added new makeText() constructor without length parameter
 - Adjusted the default paddings and values for the toast
 - Over all refactoring
 
@@ -45,7 +46,7 @@ An Android library that takes the standard Android Toast to the next level with 
 ```xml
         <item name="textBold">true</item>
         <item name="textColor">#fff</item>
-        <item name="textFont">fonts/dosis.otf</item>
+        <item name="textFont">@fonts/dosier</item>
         <item name="textSize">14sp</item>
         <item name="colorBackground">#fff</item>
         <item name="solidBackground">true</item>
@@ -76,11 +77,10 @@ An Android library that takes the standard Android Toast to the next level with 
     
 ## Installation
 
-Add the depedency in your `build.gradle` The library is distributed via jCenter
-
+Add the depedency in your `build.gradle`
 ```groovy
 dependencies {
-    implementation 'com.muddzdev:styleabletoast:2.0.0'   
+    implementation 'com.muddzdev:styleabletoast:2.0.1'   
 }
 ```
 
