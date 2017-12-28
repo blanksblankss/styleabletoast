@@ -6,8 +6,8 @@
 An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml!
 
 
-## Release note version: 2.0.1  **IMPORTANT** |  18 December 2017
-Read the changes from `1.0.9` To `2.0.1` before updating!
+## Release note version: 2.0.1 |  18 December 2017
+Important! Read the changes from `1.0.9` To `2.0.1` before updating!
 
 - replaced alpha() with solidBackground()
 - replaced strokeWidth() and strokeColor() with stroke(width,color)
