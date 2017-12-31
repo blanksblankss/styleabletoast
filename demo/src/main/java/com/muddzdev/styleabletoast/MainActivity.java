@@ -1,11 +1,8 @@
 package com.muddzdev.styleabletoast;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,10 +27,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.button3:
-                Typeface typeface = ResourcesCompat.getFont(this, R.font.toastfont);
                 new StyleableToast
                         .Builder(this)
-                        .typeface(typeface)
+                        .font(R.font.toastfont)
+                        .textBold()
                         .text("Turn off flight mode")
                         .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
                         .backgroundColor(Color.parseColor("#865aff"))
