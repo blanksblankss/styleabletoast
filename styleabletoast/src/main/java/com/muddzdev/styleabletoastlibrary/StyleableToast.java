@@ -180,25 +180,26 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             textView.setTextSize(isTextSizeFromStyle ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
         }
 
-        if (fontId > 0 && !textBold) {
-            textView.setTypeface(ResourcesCompat.getFont(context, fontId));
 
-        } else if (fontId > 0 && textBold) {
-            textView.setTypeface(ResourcesCompat.getFont(context, fontId), Typeface.BOLD);
-            return;
-        }
-
-        //TODO THIS ONE
-
-        if (textBold && typeface == null) {
-            textView.setTypeface(Typeface.create(context.getString(R.string.default_font), Typeface.BOLD));
-        } else if (textBold) {
-            textView.setTypeface(Typeface.create(typeface, Typeface.BOLD));
+        if (fontId > 0) {
+            textView.setTypeface(ResourcesCompat.getFont(context, fontId), textBold ? Typeface.BOLD : 0);
         } else if (typeface != null) {
-            textView.setTypeface(typeface);
-        } else if (fontId > 0) {
-            textView.setTypeface(ResourcesCompat.getFont(context, fontId));
+            textView.setTypeface(typeface, textBold ? Typeface.BOLD : 0);
+        } else {
+            textView.setTypeface(Typeface.create(context.getString(R.string.default_font), textBold ? Typeface.BOLD : Typeface.NORMAL));
         }
+
+//        //Default
+//        if (textBold && typeface == null) {
+//            textView.setTypeface(Typeface.create(context.getString(R.string.default_font), Typeface.BOLD));
+//        } else if (textBold) {
+//            //Default with bold
+//            textView.setTypeface(Typeface.create(typeface, Typeface.BOLD));
+//        } else if (typeface != null) {
+//            textView.setTypeface(typeface);
+//        } else if (fontId > 0) {
+//            textView.setTypeface(ResourcesCompat.getFont(context, fontId));
+//        }
     }
 
 
@@ -254,12 +255,12 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         isTextSizeFromStyle = textSize > 0;
         fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
 
-//        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
-//        if (textFontPath != null) {
-//            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
-//                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
-//            }
-//        }
+        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
+        if (textFontPath != null) {
+            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
+                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
+            }
+        }
     }
 
 
