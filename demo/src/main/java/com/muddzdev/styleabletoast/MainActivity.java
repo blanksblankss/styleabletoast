@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                         .Builder(this)
                         .font(R.font.toastfont)
                         .textBold()
-                        .text("Turn off flight mode")
+                        .text("Custom font bold")
                         .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
                         .backgroundColor(Color.parseColor("#865aff"))
                         .show();
@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
                 new StyleableToast
                         .Builder(this)
-                        .text("Updating profile")
+                        .text("Custom font")
+                        .font(R.font.toastfont)
                         .textColor(Color.WHITE)
                         .backgroundColor(Color.parseColor("#ff5a5f"))
                         .iconResLeft(R.drawable.ic_autorenew_black_24dp)
@@ -54,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button5:
                 new StyleableToast
                         .Builder(this)
-                        .text("Milk added to list")
-                        .font(R.font.dosis)
+                        .text("Default bold")
+                        .textBold()
                         .backgroundColor(Color.parseColor("#74ba82"))
                         .show();
 
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.button6:
                 new StyleableToast
                         .Builder(this)
-                        .text("Picture saved to gallery")
+                        .text("Default")
                         .textColor(Color.parseColor("#fc2d3e"))
                         .backgroundColor(Color.parseColor("#dddddd"))
                         .show();

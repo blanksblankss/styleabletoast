@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
@@ -55,7 +56,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
     private int length;
     private int style;
     private float textSize;
-    private boolean isTextSizeFromStyle = false;
+    private boolean isTextSizeFromStyleXml = false;
     private boolean hasAnimation;
     private boolean solidBackground;
     private boolean textBold;
@@ -172,34 +173,24 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
     private void makeTextView() {
         loadTextViewStyleAttributes();
         textView.setText(text);
+
         if (textColor != 0) {
             textView.setTextColor(textColor);
         }
 
         if (textSize > 0) {
-            textView.setTextSize(isTextSizeFromStyle ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
+            textView.setTextSize(isTextSizeFromStyleXml ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
         }
 
 
         if (fontId > 0) {
             textView.setTypeface(ResourcesCompat.getFont(context, fontId), textBold ? Typeface.BOLD : 0);
         } else if (typeface != null) {
+            //TODO ----- DEPRECATED CODE -----
             textView.setTypeface(typeface, textBold ? Typeface.BOLD : 0);
         } else {
             textView.setTypeface(Typeface.create(context.getString(R.string.default_font), textBold ? Typeface.BOLD : Typeface.NORMAL));
         }
-
-//        //Default
-//        if (textBold && typeface == null) {
-//            textView.setTypeface(Typeface.create(context.getString(R.string.default_font), Typeface.BOLD));
-//        } else if (textBold) {
-//            //Default with bold
-//            textView.setTypeface(Typeface.create(typeface, Typeface.BOLD));
-//        } else if (typeface != null) {
-//            textView.setTypeface(typeface);
-//        } else if (fontId > 0) {
-//            textView.setTypeface(ResourcesCompat.getFont(context, fontId));
-//        }
     }
 
 
@@ -252,9 +243,10 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         textColor = typedArray.getColor(R.styleable.StyleableToast_textColor, Color.WHITE);
         textBold = typedArray.getBoolean(R.styleable.StyleableToast_textBold, false);
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
-        isTextSizeFromStyle = textSize > 0;
         fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
+        isTextSizeFromStyleXml = textSize > 0;
 
+        //TODO ----- DEPRECATED CODE -----
         String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
         if (textFontPath != null) {
             if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
