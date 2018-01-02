@@ -4,15 +4,11 @@
 
     <font
         app:fontWeight="400"
-        app:font="@font/alex"
-        android:fontWeight="400"
-        android:font="@font/alex" />
+        app:font="@font/alex"/>
 
 
     <font
         app:fontWeight="700"
-        app:font="@font/dosis"
-        android:fontWeight="700"
-        android:font="@font/dosis" />
+        app:font="@font/dosis"/>
 
 </font-family>
