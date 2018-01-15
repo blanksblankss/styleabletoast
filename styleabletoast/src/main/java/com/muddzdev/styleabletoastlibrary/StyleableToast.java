@@ -184,12 +184,12 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
 
 
         if (fontId > 0) {
-            textView.setTypeface(ResourcesCompat.getFont(context, fontId), textBold ? Typeface.BOLD : 0);
+            textView.setTypeface(ResourcesCompat.getFont(context, fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
         } else if (typeface != null) {
             //TODO ----- DEPRECATED CODE -----
-            textView.setTypeface(typeface, textBold ? Typeface.BOLD : 0);
+            textView.setTypeface(typeface, textBold ? Typeface.BOLD : Typeface.NORMAL);
         } else {
-            textView.setTypeface(Typeface.create(context.getString(R.string.default_font), textBold ? Typeface.BOLD : Typeface.NORMAL));
+            textView.setTypeface(textView.getTypeface(), textBold ? Typeface.BOLD : Typeface.NORMAL);
         }
     }
 
@@ -286,6 +286,11 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             getAnimation().cancel();
             getAnimation().reset();
         }
+    }
+
+
+    private int toDp(int value) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 
 
