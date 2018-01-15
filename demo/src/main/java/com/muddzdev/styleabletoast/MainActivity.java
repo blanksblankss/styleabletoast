@@ -27,37 +27,13 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    @BindView(R.id.corner_value_txv)
-    TextView cornerValueTxv;
-    @BindView(R.id.corner_radius_sb)
-    AppCompatSeekBar cornerRadiusSb;
-    @BindView(R.id.stroke_value_txv)
-    TextView strokeValueTxv;
-    @BindView(R.id.stroke_width_sb)
-    AppCompatSeekBar strokeWidthSb;
-    @BindView(R.id.strokecolor_btn)
-    Button strokecolorBtn;
-    @BindView(R.id.backgroundcolor_btn)
-    Button backgroundcolorBtn;
-    @BindView(R.id.textcolor_btn)
-    Button textcolorBtn;
-    @BindView(R.id.icon_left)
-    ImageView iconLeftImv;
-    @BindView(R.id.textview)
-    TextView textview;
-    @BindView(R.id.icon_right)
-    ImageView iconRightImv;
-    @BindView(R.id.demo_toast)
-    LinearLayout demoToast;
-    @BindView(R.id.text_bold_cb)
-    CheckBox textBoldCb;
-    @BindView(R.id.icon_left_cb)
-    CheckBox iconLeftCb;
-    @BindView(R.id.icon_right_cb)
-    CheckBox iconRightCb;
     private Typeface fontNormal;
     private Typeface fontBold;
+
+    //TODO adjusted toast color and vertical padding = DONE
+    //TODO Add shadows on textview like the original toast = DONE
+    //TODO convert values to DP in the library =
+    //TODO Make demo!!
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -66,12 +42,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new StyleableToast
+                        .Builder(MainActivity.this)
+                        .text("Hello")
+                        .show();
+            }
+        });
 
-        new StyleableToast
-                .Builder(this)
-                .font(R.font.dosis)
-                .text("Hello")
-                .show();
+        findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
 //        textBoldCb.setOnCheckedChangeListener(this);
@@ -80,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
 //        cornerRadiusSb.setOnSeekBarChangeListener(this);
 //        strokeWidthSb.setOnSeekBarChangeListener(this);
 
-        textview.setText("Hello World");
-        strokeValueTxv.setText(strokeWidthSb.getProgress() + "dp");
-        cornerValueTxv.setText(cornerRadiusSb.getProgress() + "dp");
-        fontNormal = Typeface.create(textview.getTypeface(), Typeface.NORMAL);
-        fontBold = Typeface.create(getResources().getString(R.string.default_font), Typeface.BOLD);
+//        textview.setText("Hello World");
+//        strokeValueTxv.setText(strokeWidthSb.getProgress() + "dp");
+//        cornerValueTxv.setText(cornerRadiusSb.getProgress() + "dp");
+//        fontNormal = Typeface.create(textview.getTypeface(), Typeface.NORMAL);
+//        fontBold = Typeface.create(getResources().getString(R.string.default_font), Typeface.BOLD);
     }
 
 

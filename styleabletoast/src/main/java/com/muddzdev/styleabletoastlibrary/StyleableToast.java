@@ -167,6 +167,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
         }
 
+
         rootLayout.setBackground(gradientDrawable);
     }
 
@@ -188,7 +189,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         } else if (typeface != null) {
             //TODO ----- DEPRECATED CODE -----
             textView.setTypeface(typeface, textBold ? Typeface.BOLD : Typeface.NORMAL);
-        } else {
+        } else if (textBold) {
             textView.setTypeface(textView.getTypeface(), textBold ? Typeface.BOLD : Typeface.NORMAL);
         }
     }
