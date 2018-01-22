@@ -15,7 +15,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.AppCompatTextView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,7 +22,6 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +41,7 @@ import android.widget.Toast;
 
 
 @SuppressLint("ViewConstructor")
-public class StyleableToast extends RelativeLayout implements OnToastFinishedListener {
+public class StyleableToast extends LinearLayout implements OnToastFinishedListener {
 
     private int cornerRadius = -1;
     private int backgroundColor;
@@ -68,7 +66,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
     private ImageView iconRight;
     private Toast styleableToast;
     private LinearLayout rootLayout;
-    private Context context;
 
     public static StyleableToast makeText(@NonNull Context context, String text, int length, @StyleRes int style) {
         return new StyleableToast(context, text, length, style);
@@ -80,7 +77,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
 
     private StyleableToast(@NonNull Context context, String text, int length, @StyleRes int style) {
         super(context);
-        this.context = context;
         this.text = text;
         this.length = length;
         this.style = style;
@@ -88,7 +84,6 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
 
     private StyleableToast(StyleableToast.Builder builder) {
         super(builder.context);
-        this.context = builder.context.getApplicationContext();
         this.backgroundColor = builder.backgroundColor;
         this.cornerRadius = builder.cornerRadius;
         this.iconResRight = builder.iconResRight;
@@ -125,6 +120,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             typedArray.recycle();
         }
 
+        //TODO TO BE DELTED
         if (hasAnimation) {
             iconLeft.setAnimation(getAnimation());
             new ToastLengthTracker(length, this);
@@ -133,7 +129,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
 
     public void show() {
         initStyleableToast();
-        styleableToast = new Toast(context);
+        styleableToast = new Toast(getContext());
         styleableToast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         styleableToast.setView(rootLayout);
         styleableToast.show();
@@ -145,6 +141,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         }
     }
 
+    //TODO TO BE DELTED
     @Deprecated
     public Toast getStyleableToast() {
         return styleableToast;
@@ -154,19 +151,19 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground();
-        gradientDrawable.setCornerRadius(cornerRadius != -1 ? cornerRadius : R.dimen.default_corner_radius);
-        gradientDrawable.setStroke(strokeWidth, strokeColor);
-        if (backgroundColor == 0) {
-            gradientDrawable.setColor(ContextCompat.getColor(context, R.color.defaultBackgroundColor));
-        } else {
+        gradientDrawable.setCornerRadius(cornerRadius != -1 ? toDp(cornerRadius) : R.dimen.default_corner_radius);
+        gradientDrawable.setStroke(toDp(strokeWidth), strokeColor);
+
+        //TODO WHY IS THIS STICKING TO THE SAME COLOR
+        if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
         }
+
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
         } else {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
         }
-
 
         rootLayout.setBackground(gradientDrawable);
     }
@@ -183,11 +180,10 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             textView.setTextSize(isTextSizeFromStyleXml ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
         }
 
-
         if (fontId > 0) {
-            textView.setTypeface(ResourcesCompat.getFont(context, fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
+            textView.setTypeface(ResourcesCompat.getFont(getContext(), fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
         } else if (typeface != null) {
-            //TODO ----- DEPRECATED CODE -----
+            //TODO ----- DEPRECATED CODE ----- TO BE DELETED
             textView.setTypeface(typeface, textBold ? Typeface.BOLD : Typeface.NORMAL);
         } else if (textBold) {
             textView.setTypeface(textView.getTypeface(), textBold ? Typeface.BOLD : Typeface.NORMAL);
@@ -221,7 +217,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         }
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
-        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(context, R.color.defaultBackgroundColor));
+        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), R.color.defaultBackgroundColor));
         cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, R.dimen.default_corner_radius);
 
         if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
@@ -247,11 +243,11 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
         isTextSizeFromStyleXml = textSize > 0;
 
-        //TODO ----- DEPRECATED CODE -----
+        //TODO ----- DEPRECATED CODE ---TO BE DELETED--
         String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
         if (textFontPath != null) {
             if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
-                typeface = Typeface.createFromAsset(context.getAssets(), textFontPath);
+                typeface = Typeface.createFromAsset(getContext().getAssets(), textFontPath);
             }
         }
     }
@@ -265,7 +261,7 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
         iconResRight = typedArray.getResourceId(R.styleable.StyleableToast_iconRight, 0);
     }
 
-
+    //TODO ----- DEPRECATED CODE ---TO BE DELETED--
     public Animation getAnimation() {
         if (hasAnimation) {
             RotateAnimation anim = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -275,7 +271,9 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             return anim;
         }
         return null;
+
     }
+    //TODO ----- DEPRECATED CODE ---TO BE DELETED--
 
     /**
      * A callback that automatically cancels and resets animation effect from spinIcon(); when the StyleableToastListener is finished showing on screen.
@@ -338,6 +336,8 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             return this;
         }
 
+        //TODO TO BE DELTED
+
         /**
          * Use the new method {@link #font(int)} instead.
          */
@@ -388,6 +388,8 @@ public class StyleableToast extends RelativeLayout implements OnToastFinishedLis
             this.iconResRight = iconResRight;
             return this;
         }
+
+        //TODO TO BE DELTED
 
         /**
          * Enables spinning animation of the passed iconResLeft by its around its own center.

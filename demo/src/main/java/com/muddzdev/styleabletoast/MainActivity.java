@@ -32,7 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO adjusted toast color and vertical padding = DONE
     //TODO Add shadows on textview like the original toast = DONE
-    //TODO convert values to DP in the library =
+    //TODO convert values to DP in the library = DONE
+    //TODO ROOT layout is wrong = DONE!
+    //TODO CLEANED UP THE CONTEXT GLOBAL VARIABLE. WAS NOT NEEDED = DONE
+
+    //TODO Why is background color value sticking to its old value?
     //TODO Make demo!!
 
     @SuppressLint("SetTextI18n")
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast
                         .Builder(MainActivity.this)
                         .text("Hello")
+                        .textColor(Color.RED)
                         .show();
             }
         });
@@ -55,7 +60,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Hello", Toast.LENGTH_SHORT).show();
+                new StyleableToast
+                        .Builder(MainActivity.this)
+                        .text("Hello")
+                        .textColor(Color.BLACK)
+                        .backgroundColor(Color.YELLOW)
+                        .show();
 
             }
         });
