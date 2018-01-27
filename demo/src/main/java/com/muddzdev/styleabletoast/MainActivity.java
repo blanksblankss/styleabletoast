@@ -52,21 +52,53 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast
                         .Builder(MainActivity.this)
                         .text("Hello")
-                        .textColor(Color.RED)
                         .show();
+
+//                new StyleableToast
+//                        .Builder(MainActivity.this)
+//                        .textColor(Color.YELLOW)
+//                        .text("Hello")
+//                        .length(Toast.LENGTH_LONG)
+//                        .backgroundColor(Color.BLACK)
+//                        .stroke(1, Color.YELLOW)
+//                        .show();
             }
         });
 
         findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 new StyleableToast
                         .Builder(MainActivity.this)
                         .text("Hello")
-                        .textColor(Color.BLACK)
-                        .backgroundColor(Color.YELLOW)
+                        .backgroundColor(Color.parseColor("#ff0000"))
                         .show();
+//                new StyleableToast
+//                        .Builder(MainActivity.this)
+//                        .text("Hello")
+//                        .backgroundColor(Color.YELLOW)
+//                        .show();
+//                new StyleableToast
+//                        .Builder(MainActivity.this)
+//                        .textColor(Color.GREEN)
+//                        .text("Hello")
+//                        .length(Toast.LENGTH_LONG)
+//                        .backgroundColor(Color.BLUE)
+//                        .stroke(1, Color.GREEN)
+//                        .show();
 
+            }
+        });
+
+        findViewById(R.id.textcolor_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new StyleableToast
+                        .Builder(MainActivity.this)
+                        .text("Hello")
+                        .backgroundColor(Color.GREEN)
+                        .show();
             }
         });
 

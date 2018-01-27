@@ -28,6 +28,13 @@
         <item name="colorBackground">#5c7299</item>
     </style>
 
+    <style name="blu">
+
+    </style>
+    <style name="yell">
+        <item name="colorBackground">#ffd000</item>
+    </style>
+
     <style name="empty">
     </style>
 

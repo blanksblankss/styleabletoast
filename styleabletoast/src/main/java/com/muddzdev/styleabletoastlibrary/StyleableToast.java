@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -15,6 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.content.res.TypedArrayUtils;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
@@ -24,6 +27,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.lang.ref.WeakReference;
+import java.util.UUID;
 
 //        Copyright 2017 Muddii Walid (Muddz)
 //
@@ -112,8 +118,8 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         }
 
         makeShape();
-        makeIcon();
         makeTextView();
+        makeIcon();
 
         // Very important to recycle AFTER the make() methods!
         if (typedArray != null) {
@@ -292,9 +298,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 
-
     public static class Builder {
-
         private int cornerRadius = -1;
         private int backgroundColor;
         private int strokeColor;
@@ -311,6 +315,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         private String text;
         private Typeface typeface;
         private final Context context;
+        private StyleableToast styleableToast;
 
         public Builder(@NonNull Context context) {
             this.context = context;
@@ -409,8 +414,9 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         }
 
         public void show() {
-            StyleableToast styleableToast = new StyleableToast(this);
+            styleableToast = new StyleableToast(this);
             styleableToast.show();
         }
+
     }
 }
