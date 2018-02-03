@@ -30,8 +30,8 @@ dependencies {
 }
 
 
-def siteUrl = 'https://github.com/Muddz/StyleableToastListener'
-def gitUrl = 'https://github.com/Muddz/StyleableToastListener.git'
+def siteUrl = 'https://github.com/Muddz/StyleableToast'
+def gitUrl = 'https://github.com/Muddz/StyleableToast.git'
 def developerName = "muddz"
 group = "com.muddzdev"
 
@@ -99,7 +99,7 @@ Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    bintray.user = developerName
+    bintray.user = "muddz"
     bintray.key = "cd5bf822712334ccc336c04175625b0a46fae25b"
 
     configurations = ['archives']
@@ -111,7 +111,7 @@ bintray {
         licenses = ["Apache-2.0"]
         version {
             gpg {
-                name = version
+                name = "2.0.2"
             }
         }
     }
