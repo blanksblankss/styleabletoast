@@ -5,21 +5,21 @@
 
 An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml!
 
+> ## Release note version: 2.0.1 | 18 December 2017
+> Important! Read the changes from `1.0.9` To `2.0.x` before updating!
 
-## Release note version: 2.0.1 |  18 December 2017
-Important! Read the changes from `1.0.9` To `2.0.1` before updating!
+> - Replaced `alpha()` with `solidBackground()`
+> - Replaced `strokeWidth()` and `strokeColor()` with `stroke(width,color)`
+> - Removed `getToast()` and `build()`
+> - Removed 4 lines text limit
+> - Added `iconLeft()` & `iconRight()`
+> - Added `textSize()`
+> - Deprecated `typeface()` Use `font()` with the new Font api in Android 8 -> R.font.xx
+> - Added new custom styles.xml attribute. See below!
+> - Added new `makeText()` constructor without length parameter
+> - Adjusted the default paddings and values for the toast
+> - Over all refactoring
 
-- replaced alpha() with solidBackground()
-- replaced strokeWidth() and strokeColor() with stroke(width,color)
-- Removed getToast() and build()
-- Removed 4 lines text limit
-- added iconLeft() & iconRight()
-- added textSize()
-- deprecated typeface(). Use font() with the new Font api in Android 8 -> R.font.xx
-- added new custom styles.xml attribute. See below!
-- added new makeText() constructor without length parameter
-- Adjusted the default paddings and values for the toast
-- Over all refactoring
 
 ## Cases:
 
