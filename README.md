@@ -76,7 +76,7 @@ See examples below or try the demo app.
 Add the depedency in your `build.gradle`
 ```groovy
 dependencies {
-    implementation 'com.muddzdev:styleabletoast:2.0.1'   
+    implementation 'com.muddzdev:styleabletoast:2.0.2'   
 }
 ```
 
