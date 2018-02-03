@@ -30,15 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private Typeface fontNormal;
     private Typeface fontBold;
 
-    //TODO adjusted toast color and vertical padding = DONE
-    //TODO Add shadows on textview like the original toast = DONE
-    //TODO convert values to DP in the library = DONE
-    //TODO ROOT layout is wrong = DONE!
-    //TODO CLEANED UP THE CONTEXT GLOBAL VARIABLE. WAS NOT NEEDED = DONE
-
-    //TODO Why is background color value sticking to its old value?
-    //TODO Make demo!!
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,42 +42,37 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new StyleableToast
                         .Builder(MainActivity.this)
+                        .backgroundColor(Color.YELLOW)
+                        .textColor(Color.RED)
+                        .stroke(1, Color.RED)
                         .text("Hello")
+                        .solidBackground()
+                        .textBold()
+                        .length(Toast.LENGTH_LONG)
+                        .cornerRadius(4)
+                        .iconResLeft(R.drawable.ic_star_black_24dp)
+                        .iconResRight(R.drawable.ic_star_black_24dp)
+                        .font(R.font.a)
                         .show();
-
-//                new StyleableToast
-//                        .Builder(MainActivity.this)
-//                        .textColor(Color.YELLOW)
-//                        .text("Hello")
-//                        .length(Toast.LENGTH_LONG)
-//                        .backgroundColor(Color.BLACK)
-//                        .stroke(1, Color.YELLOW)
-//                        .show();
             }
         });
 
         findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 new StyleableToast
                         .Builder(MainActivity.this)
+                        .backgroundColor(Color.BLACK)
+                        .stroke(1, Color.BLUE)
                         .text("Hello")
-                        .backgroundColor(Color.parseColor("#ff0000"))
+                        .solidBackground()
+                        .textBold()
+                        .length(Toast.LENGTH_LONG)
+                        .cornerRadius(20)
+                        .iconResLeft(R.drawable.ic_star_black_24dp)
+                        .iconResRight(R.drawable.ic_star_black_24dp)
+                        .font(R.font.alex)
                         .show();
-//                new StyleableToast
-//                        .Builder(MainActivity.this)
-//                        .text("Hello")
-//                        .backgroundColor(Color.YELLOW)
-//                        .show();
-//                new StyleableToast
-//                        .Builder(MainActivity.this)
-//                        .textColor(Color.GREEN)
-//                        .text("Hello")
-//                        .length(Toast.LENGTH_LONG)
-//                        .backgroundColor(Color.BLUE)
-//                        .stroke(1, Color.GREEN)
-//                        .show();
 
             }
         });

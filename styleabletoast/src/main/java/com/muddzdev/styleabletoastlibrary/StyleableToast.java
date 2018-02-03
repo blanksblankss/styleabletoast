@@ -160,9 +160,10 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         gradientDrawable.setCornerRadius(cornerRadius != -1 ? toDp(cornerRadius) : R.dimen.default_corner_radius);
         gradientDrawable.setStroke(toDp(strokeWidth), strokeColor);
 
-        //TODO WHY IS THIS STICKING TO THE SAME COLOR
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
+        }else{
+            gradientDrawable.setColor(ContextCompat.getColor(getContext(),R.color.defaultBackgroundColor));
         }
 
         if (solidBackground) {
