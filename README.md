@@ -6,8 +6,6 @@
 An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml.
 See examples below or try the demo app.
 
----
-
 
 
 
