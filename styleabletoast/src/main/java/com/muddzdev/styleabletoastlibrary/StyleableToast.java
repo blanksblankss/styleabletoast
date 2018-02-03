@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -16,8 +15,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
@@ -27,9 +24,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.lang.ref.WeakReference;
-import java.util.UUID;
 
 //        Copyright 2017 Muddii Walid (Muddz)
 //
@@ -109,7 +103,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
     private void initStyleableToast() {
         View v = inflate(getContext(), R.layout.styleable_layout, null);
-        rootLayout = v.findViewById(R.id.root);
+        rootLayout = v.findViewById(R.id.rootview);
         textView = v.findViewById(R.id.textview);
         iconLeft = v.findViewById(R.id.icon_left);
         iconRight = v.findViewById(R.id.icon_right);
