@@ -9,8 +9,6 @@ See examples below or try the demo app.
 
 
 
-
-
 > ## Release note version: 2.0.1 | 18 December 2017
 >   Important! Read the changes from `1.0.9` To `2.0.x` before updating!
 > 
