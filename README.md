@@ -12,9 +12,9 @@ See examples below or try the demo app.
 > ## Release notes
 >   Version 2.0.2
 > - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
-
+>
 >Version 2.0.1 - Important! Read changes from `1.0.9` before updating to a `2.x.x` version
-
+>
 > - Replaced `alpha()` with `solidBackground()`
 > - Replaced `strokeWidth()` and `strokeColor()` with `stroke(width,color)`
 > - Removed `getToast()` and `build()`
