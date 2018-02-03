@@ -3,7 +3,8 @@
 [![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/Muddz/StyleableToast/raw/master/demo.apk)
 [![LICENSE](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://github.com/Muddz/StyleableToast/blob/master/LICENSE)
 
-An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml! See examples below or try the demo app.
+An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml
+See examples below or try the demo app.
 
 
 
