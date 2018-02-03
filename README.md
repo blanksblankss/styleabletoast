@@ -7,7 +7,7 @@ An Android library that takes the standard Android toast to the next level with 
 
 > ## Release note version: 2.0.1 | 18 December 2017
 > Important! Read the changes from `1.0.9` To `2.0.x` before updating!
-
+> 
 > - Replaced `alpha()` with `solidBackground()`
 > - Replaced `strokeWidth()` and `strokeColor()` with `stroke(width,color)`
 > - Removed `getToast()` and `build()`
