@@ -30,7 +30,7 @@ See examples below or try the demo app.
 
 ## Cases:
 
-<img src="https://github.com/Muddz/StyleableToast/blob/master/cases.png" width="80%">
+<img src="https://github.com/Muddz/StyleableToast/blob/master/cases.png" width="75%">
 
 
 ## Example with a style from styles.xml
@@ -73,7 +73,7 @@ See examples below or try the demo app.
     
 ## Installation
 
-Add the depedency in your `build.gradle`
+Add the depedency in your apps `build.gradle` file
 ```groovy
 dependencies {
     implementation 'com.muddzdev:styleabletoast:2.0.2'   
