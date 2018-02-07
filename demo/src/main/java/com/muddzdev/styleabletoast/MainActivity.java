@@ -23,8 +23,9 @@ import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBarChangeListener, CompoundButton.OnCheckedChangeListener {
 
     @BindView(R.id.corner_value_txv)
     TextView cornerValueTxv;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     private Typeface fontBold;
     private GradientDrawable gradientDrawable;
     private StyleableToast.Builder toast;
+    private String toastMsg = "Hello World";
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -68,19 +70,10 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        ButterKnife.bind(demoToast);
+        initToastPreview();
 
         toast = new StyleableToast.Builder(MainActivity.this);
-
-        textview.setText("Hello World!");
-        gradientDrawable = (GradientDrawable) demoToast.getBackground();
-
-        cornerRadiusSb.setOnSeekBarChangeListener(this);
-        strokeWidthSb.setOnSeekBarChangeListener(this);
-        playBtn.setOnClickListener(this);
-        textBoldCb.setOnCheckedChangeListener(this);
-        iconLeftCb.setOnCheckedChangeListener(this);
-        iconRightCb.setOnCheckedChangeListener(this);
-
         strokeValueTxv.setText(strokeWidthSb.getProgress() + "dp");
         cornerValueTxv.setText(cornerRadiusSb.getProgress() + "dp");
         fontNormal = Typeface.create(textview.getTypeface(), Typeface.NORMAL);
@@ -88,12 +81,41 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
     }
 
 
-    private void showDemoToast() {
+    private void initToastPreview() {
+        textview.setText(toastMsg);
+        gradientDrawable = (GradientDrawable) getDrawable(R.drawable.styleabletoast_shape);
+        demoToast.setBackground(gradientDrawable);
+        cornerRadiusSb.setOnSeekBarChangeListener(this);
+        strokeWidthSb.setOnSeekBarChangeListener(this);
+        textBoldCb.setOnCheckedChangeListener(this);
+        iconLeftCb.setOnCheckedChangeListener(this);
+        iconRightCb.setOnCheckedChangeListener(this);
+    }
+
+
+    @OnClick(R.id.textcolor_btn)
+    public void onTextColorClicked() {
+      new StyleableToast.Builder(this)
+                .text("hello")
+                .length(Toast.LENGTH_LONG)
+                .backgroundColor(Color.RED).show();
+    }
+
+    @OnClick(R.id.backgroundcolor_btn)
+    public void onTBextColorClicked() {
+        new StyleableToast.Builder(this)
+                .text("hello")
+                .solidBackground()
+                .length(Toast.LENGTH_LONG).show();
+    }
+
+    @OnClick(R.id.play_btn)
+    public void playToast() {
         demoToast.setVisibility(View.GONE);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                toast.text("Hello world");
+                toast.text(toastMsg);
                 toast.length(Toast.LENGTH_LONG);
                 toast.show();
                 new Handler().postDelayed(new Runnable() {
@@ -116,6 +138,9 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                 cornerValueTxv.setText(String.format("%s dp", progress));
                 break;
             case R.id.stroke_width_sb:
+                gradientDrawable = new GradientDrawable();
+                gradientDrawable.setCornerRadius(intToDp(24));
+                gradientDrawable.setColor(R.color.defaultBackgroundColor);
                 gradientDrawable.setStroke((int) intToDp(progress), Color.RED);
                 demoToast.setBackground(gradientDrawable);
                 toast.stroke(progress, Color.RED);
@@ -124,14 +149,6 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.play_btn:
-                showDemoToast();
-                break;
-        }
-    }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -141,8 +158,18 @@ public class MainActivity extends AppCompatActivity implements SeekBar.OnSeekBar
                 textview.setTypeface(typeface);
                 toast.typeface(typeface);
                 break;
-
-
+            case R.id.icon_left_cb:
+                int iconResLeft = isChecked ? R.drawable.ic_airplanemode_inactive_black_24dp : 0;
+                iconLeft.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+                iconLeft.setBackgroundResource(iconResLeft);
+                toast.iconResLeft(iconResLeft);
+                break;
+            case R.id.icon_right_cb:
+                int iconResRight = isChecked ? R.drawable.ic_autorenew_black_24dp : 0;
+                iconRight.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+                iconRight.setBackgroundResource(iconResRight);
+                toast.iconResRight(iconResRight);
+                break;
         }
     }
 

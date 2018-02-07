@@ -103,7 +103,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
     private void initStyleableToast() {
         View v = inflate(getContext(), R.layout.styleable_layout, null);
-        rootLayout = v.findViewById(R.id.rootview);
+        rootLayout = v.findViewById(R.id.toastlayout);
         textView = v.findViewById(R.id.textview);
         iconLeft = v.findViewById(R.id.icon_left);
         iconRight = v.findViewById(R.id.icon_right);
@@ -150,22 +150,16 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
     private void makeShape() {
         loadShapeAttributes();
-        GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground();
+        GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground().mutate();
         gradientDrawable.setCornerRadius(cornerRadius != -1 ? toDp(cornerRadius) : R.dimen.default_corner_radius);
         gradientDrawable.setStroke(toDp(strokeWidth), strokeColor);
 
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
-        }else{
-            gradientDrawable.setColor(ContextCompat.getColor(getContext(),R.color.defaultBackgroundColor));
         }
-
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
-        } else {
-            gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
         }
-
         rootLayout.setBackground(gradientDrawable);
     }
 
@@ -176,12 +170,11 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         if (textColor != 0) {
             textView.setTextColor(textColor);
         }
-
         if (textSize > 0) {
             textView.setTextSize(isTextSizeFromStyleXml ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
         }
 
-        if (fontId > 0) {
+        if (fontId != 0) {
             textView.setTypeface(ResourcesCompat.getFont(getContext(), fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
         } else if (typeface != null) {
             //TODO ----- DEPRECATED CODE ----- TO BE DELETED
