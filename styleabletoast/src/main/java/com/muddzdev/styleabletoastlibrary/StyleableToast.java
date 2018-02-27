@@ -103,7 +103,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
     private void initStyleableToast() {
         View v = inflate(getContext(), R.layout.styleable_layout, null);
-        rootLayout = v.findViewById(R.id.toastlayout);
+        rootLayout = v.findViewById(R.id.root);
         textView = v.findViewById(R.id.textview);
         iconLeft = v.findViewById(R.id.icon_left);
         iconRight = v.findViewById(R.id.icon_right);

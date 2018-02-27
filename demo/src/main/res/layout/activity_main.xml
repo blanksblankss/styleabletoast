@@ -1,181 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="24dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Corner radius: "
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/corner_value_txv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    tools:text="24dp" />
-
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatSeekBar
-                android:id="@+id/corner_radius_sb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="24"
-                android:progress="24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Stroke width:"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/stroke_value_txv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    tools:text="10 dp" />
-
-            </LinearLayout>
-
-            <android.support.v7.widget.AppCompatSeekBar
-                android:id="@+id/stroke_width_sb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:max="5"
-                android:progress="0" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <Button
-                android:id="@+id/strokecolor_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Stroke Color" />
-
-            <Button
-                android:id="@+id/backgroundcolor_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:text="Background Color" />
-
-            <Button
-                android:id="@+id/textcolor_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_weight="1"
-                android:text="Text Color" />
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text bold"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/text_bold_cb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Icon left"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/icon_left_cb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Icon right"
-                android:textStyle="bold" />
-
-            <CheckBox
-                android:id="@+id/icon_right_cb"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/play_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Play toast" />
-
-    </LinearLayout>
-
-    <include
-        android:id="@+id/demo_toast"
-        layout="@layout/styleable_layout"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp" />
+        android:paddingBottom="10dp"
+        android:textColor="#414141"
+        android:text="Example of different styles"
+        android:textSize="16sp" />
 
-</RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Background color" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Text color" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Icons" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Corner 8 dp" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Corner 15 dp" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Full solid background" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Custom font" />
+
+            <Button
+                style="@style/DemoButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="bold text" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -8,6 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="DemoButton" parent="Base.Widget.AppCompat.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/demobutton_background</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
     <style name="allStyles">
         <item name="textBold">false</item>
         <item name="textColor">#ff003b</item>
@@ -28,14 +36,5 @@
         <item name="colorBackground">#5c7299</item>
     </style>
 
-    <style name="blu">
-
-    </style>
-    <style name="yell">
-        <item name="colorBackground">#ffd000</item>
-    </style>
-
-    <style name="empty">
-    </style>
 
 </resources>
