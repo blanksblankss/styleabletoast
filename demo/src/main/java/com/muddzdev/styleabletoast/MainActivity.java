@@ -40,19 +40,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast
-                        .Builder(MainActivity.this)
-                        .backgroundColor(Color.YELLOW)
-                        .textColor(Color.RED)
-                        .stroke(1, Color.RED)
-                        .text("Hello")
-                        .solidBackground()
-                        .textBold()
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Hello World")
                         .length(Toast.LENGTH_LONG)
-                        .cornerRadius(4)
-                        .iconResLeft(R.drawable.ic_star_black_24dp)
-                        .iconResRight(R.drawable.ic_star_black_24dp)
-                        .font(R.font.a)
                         .show();
             }
         });
@@ -60,19 +50,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast
-                        .Builder(MainActivity.this)
-                        .backgroundColor(Color.BLACK)
-                        .stroke(1, Color.BLUE)
-                        .text("Hello")
-                        .solidBackground()
-                        .textBold()
-                        .length(Toast.LENGTH_LONG)
-                        .cornerRadius(20)
-                        .iconResLeft(R.drawable.ic_star_black_24dp)
-                        .iconResRight(R.drawable.ic_star_black_24dp)
-                        .font(R.font.alex)
-                        .show();
+                Toast.makeText(getApplicationContext(), "Hello World", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -80,10 +58,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.textcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast
-                        .Builder(MainActivity.this)
-                        .text("Hello")
-                        .backgroundColor(Color.GREEN)
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Hello World")
+                        .length(Toast.LENGTH_LONG)
+                        .iconResRight(R.drawable.ic_airplanemode_inactive_black_24dp)
+                        .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
                         .show();
             }
         });

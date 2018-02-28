@@ -5,9 +5,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -16,20 +18,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.content.res.TypedArrayUtils;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.lang.ref.WeakReference;
-import java.util.UUID;
 
 //        Copyright 2017 Muddii Walid (Muddz)
 //
@@ -68,13 +64,12 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
     private TypedArray typedArray;
     private TextView textView;
     private Typeface typeface;
-    private ImageView iconLeft;
-    private ImageView iconRight;
     private Toast styleableToast;
     private LinearLayout rootLayout;
 
     public static StyleableToast makeText(@NonNull Context context, String text, int length, @StyleRes int style) {
         return new StyleableToast(context, text, length, style);
+
     }
 
     public static StyleableToast makeText(@NonNull Context context, String text, @StyleRes int style) {
@@ -111,8 +106,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         View v = inflate(getContext(), R.layout.styleable_layout, null);
         rootLayout = v.findViewById(R.id.root);
         textView = v.findViewById(R.id.textview);
-        iconLeft = v.findViewById(R.id.icon_left);
-        iconRight = v.findViewById(R.id.icon_right);
         if (style > 0) {
             typedArray = getContext().obtainStyledAttributes(style, R.styleable.StyleableToast);
         }
@@ -128,7 +121,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
         //TODO TO BE DELTED
         if (hasAnimation) {
-            iconLeft.setAnimation(getAnimation());
             new ToastLengthTracker(length, this);
         }
     }
@@ -162,8 +154,8 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
-        }else{
-            gradientDrawable.setColor(ContextCompat.getColor(getContext(),R.color.defaultBackgroundColor));
+        } else {
+            gradientDrawable.setColor(ContextCompat.getColor(getContext(), R.color.defaultBackgroundColor));
         }
 
         if (solidBackground) {
@@ -200,24 +192,48 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
     private void makeIcon() {
         loadIconAttributes();
-        if (iconResLeft > 0 || iconResRight > 0) {
-            int horizontalPadding = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_with_icon);
-            int verticalPadding = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
-            rootLayout.setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding);
+
+        int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
+        int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding);
+        int paddingIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_with_icon);
+        int iconSize = (int) getResources().getDimension(R.dimen.icon_size);
+
+        if (iconResLeft != 0) {
+            Drawable drawable = ContextCompat.getDrawable(getContext(), iconResLeft);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, iconSize, iconSize);
+            }
+            textView.setCompoundDrawables(drawable, null, null, null);
+            rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingIcon, paddingVertical);
         }
-        if (iconResLeft > 0) {
-            iconLeft.setBackgroundResource(iconResLeft);
-            iconLeft.setVisibility(VISIBLE);
+
+        if (iconResRight != 0) {
+            Drawable drawable = ContextCompat.getDrawable(getContext(), iconResRight);
+            if (drawable != null) {
+                drawable.setBounds(0, 0, iconSize, iconSize);
+            }
+            textView.setCompoundDrawables(null, null, drawable, null);
+            rootLayout.setPadding(paddingIcon, paddingVertical, paddingHorizontal, paddingVertical);
         }
-        if (iconResRight > 0) {
-            iconRight.setBackgroundResource(iconResRight);
-            iconRight.setVisibility(VISIBLE);
+
+        if (iconResLeft != 0 && iconResRight != 0) {
+            Drawable drawableLeft = ContextCompat.getDrawable(getContext(), iconResLeft);
+            if (drawableLeft != null) {
+                drawableLeft.setBounds(0, 0, iconSize, iconSize);
+            }
+            Drawable drawableRight = ContextCompat.getDrawable(getContext(), iconResRight);
+            if (drawableRight != null) {
+                drawableRight.setBounds(0, 0, iconSize, iconSize);
+            }
+            textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
+            rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
         }
     }
 
     /**
      * loads style attributes from styles.xml if a style resource is used.
      */
+
     private void loadShapeAttributes() {
         if (style == 0) {
             return;
