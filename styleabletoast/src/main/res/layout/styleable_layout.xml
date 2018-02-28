@@ -19,7 +19,7 @@
         android:paddingRight="@dimen/toast_horizontal_padding"
         android:shadowColor="#BB000000"
         android:shadowRadius="2.75"
-        android:textColor="@color/defaultTextColor"
+        android:textColor="@color/textColor"
         android:textSize="@dimen/toast_text_size"
         tools:text="Hello World" />
 

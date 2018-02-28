@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="defaultBackgroundColor">#e6444444</color>
-    <color name="defaultTextColor">#ffffff</color>
+    <color name="backgroundColor">#e6444444</color>
+    <color name="textColor">#ffffff</color>
+
+    <color name="androidO_backgroundColor">#f0f0f0</color>
+    <color name="androidO_textColor">#000</color>
 
 </resources>

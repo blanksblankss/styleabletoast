@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.PaintDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -155,7 +153,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
         } else {
-            gradientDrawable.setColor(ContextCompat.getColor(getContext(), R.color.defaultBackgroundColor));
+            gradientDrawable.setColor(ContextCompat.getColor(getContext(), R.color.backgroundColor));
         }
 
         if (solidBackground) {
@@ -240,7 +238,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         }
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
-        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), R.color.defaultBackgroundColor));
+        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), R.color.backgroundColor));
         cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, R.dimen.default_corner_radius);
 
         if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
