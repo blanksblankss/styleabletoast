@@ -7,16 +7,17 @@
     android:background="@drawable/styleabletoast_shape"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/toast_vertical_padding"
+    android:paddingLeft="@dimen/toast_horizontal_padding"
+    android:paddingRight="@dimen/toast_horizontal_padding"
     android:paddingTop="@dimen/toast_vertical_padding">
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:drawablePadding="@dimen/icon_padding"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:paddingLeft="@dimen/toast_horizontal_padding"
-        android:paddingRight="@dimen/toast_horizontal_padding"
         android:shadowColor="#BB000000"
         android:shadowRadius="2.75"
         android:textColor="@color/textColor"

@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.PaintDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -67,7 +69,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
     public static StyleableToast makeText(@NonNull Context context, String text, int length, @StyleRes int style) {
         return new StyleableToast(context, text, length, style);
-
     }
 
     public static StyleableToast makeText(@NonNull Context context, String text, @StyleRes int style) {
@@ -192,8 +193,9 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         loadIconAttributes();
 
         int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
-        int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding);
-        int paddingIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_with_icon);
+        int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
+        int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_empty_side);
+
         int iconSize = (int) getResources().getDimension(R.dimen.icon_size);
 
         if (iconResLeft != 0) {
@@ -202,7 +204,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
                 drawable.setBounds(0, 0, iconSize, iconSize);
             }
             textView.setCompoundDrawables(drawable, null, null, null);
-            rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingIcon, paddingVertical);
+            rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
         }
 
         if (iconResRight != 0) {
@@ -211,7 +213,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
                 drawable.setBounds(0, 0, iconSize, iconSize);
             }
             textView.setCompoundDrawables(null, null, drawable, null);
-            rootLayout.setPadding(paddingIcon, paddingVertical, paddingHorizontal, paddingVertical);
+            rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
         }
 
         if (iconResLeft != 0 && iconResRight != 0) {
@@ -224,7 +226,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
                 drawableRight.setBounds(0, 0, iconSize, iconSize);
             }
             textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
-            rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingHorizontal, paddingVertical);
+            rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingNoIcon, paddingVertical);
         }
     }
 
