@@ -194,7 +194,7 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
         int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
         int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
-        int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_empty_side);
+        int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding);
 
         int iconSize = (int) getResources().getDimension(R.dimen.icon_size);
 

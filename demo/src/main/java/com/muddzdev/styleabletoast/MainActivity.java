@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_pause_circle_filled_black_24dp)
+                        .iconResLeft(R.drawable.ic_ring_volume_black_24dp)
                         .show();
             }
         });
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_cloud_upload_black_24dp)
+                        .iconResLeft(R.drawable.ic_autorenew_black_24dp)
                         .show();
 
             }
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_local_grocery_store_black_24dp)
+                        .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
                         .show();
             }
         });
