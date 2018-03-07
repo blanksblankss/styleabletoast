@@ -3,27 +3,14 @@ package com.muddzdev.styleabletoast;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatSeekBar;
-import android.util.TypedValue;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,11 +27,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
-                        .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_ring_volume_black_24dp)
-                        .show();
+                StyleableToast.makeText(MainActivity.this, "Hello World", R.style.allStyles).show();
             }
         });
 
@@ -53,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
-                        .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_autorenew_black_24dp)
                         .show();
 
             }
@@ -87,15 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void playToast() {
-        new StyleableToast.Builder(this)
-                .typeface(ToastProperties.fontBold ? fontBold : fontNormal)
-                .cornerRadius(ToastProperties.cornerRadius)
-                .iconResLeft(ToastProperties.iconLeft ? 0 : 0)
-                .iconResRight(ToastProperties.iconRight ? 0 : 0)
-                .backgroundColor(ToastProperties.backgroundColor)
-                .textColor(ToastProperties.textColor)
-                .stroke(ToastProperties.strokeWidth, ToastProperties.strokeColor)
-                .show();
     }
 
 

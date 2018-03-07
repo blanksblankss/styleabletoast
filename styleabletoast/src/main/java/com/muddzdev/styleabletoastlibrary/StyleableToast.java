@@ -94,7 +94,7 @@ public class StyleableToast extends LinearLayout {
 
     private void initStyleableToast() {
         View v = inflate(getContext(), R.layout.styleable_layout, null);
-        rootLayout = v.findViewById(R.id.root);
+        rootLayout = (LinearLayout) v.getRootView();
         textView = v.findViewById(R.id.textview);
         if (style > 0) {
             typedArray = getContext().obtainStyledAttributes(style, R.styleable.StyleableToast);
@@ -265,7 +265,6 @@ public class StyleableToast extends LinearLayout {
         private boolean solidBackground;
         private boolean textBold;
         private String text;
-        private Typeface typeface;
         private final Context context;
         private StyleableToast styleableToast;
 
