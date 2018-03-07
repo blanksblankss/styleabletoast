@@ -8,8 +8,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.PaintDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -20,9 +18,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,7 +38,7 @@ import android.widget.Toast;
 
 
 @SuppressLint("ViewConstructor")
-public class StyleableToast extends LinearLayout implements OnToastFinishedListener {
+public class StyleableToast extends LinearLayout {
 
     private int cornerRadius = -1;
     private int backgroundColor;
@@ -57,13 +52,11 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
     private int style;
     private float textSize;
     private boolean isTextSizeFromStyleXml = false;
-    private boolean hasAnimation;
     private boolean solidBackground;
     private boolean textBold;
     private String text;
     private TypedArray typedArray;
     private TextView textView;
-    private Typeface typeface;
     private Toast styleableToast;
     private LinearLayout rootLayout;
 
@@ -90,12 +83,10 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         this.iconResLeft = builder.iconResLeft;
         this.strokeColor = builder.strokeColor;
         this.strokeWidth = builder.strokeWidth;
-        this.hasAnimation = builder.hasAnimation;
         this.solidBackground = builder.solidBackground;
         this.textColor = builder.textColor;
         this.textSize = builder.textSize;
         this.textBold = builder.textBold;
-        this.typeface = builder.typeface;
         this.fontId = builder.fontId;
         this.text = builder.text;
         this.length = builder.length;
@@ -117,11 +108,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         if (typedArray != null) {
             typedArray.recycle();
         }
-
-        //TODO TO BE DELTED
-        if (hasAnimation) {
-            new ToastLengthTracker(length, this);
-        }
     }
 
     public void show() {
@@ -138,18 +124,12 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         }
     }
 
-    //TODO TO BE DELTED
-    @Deprecated
-    public Toast getStyleableToast() {
-        return styleableToast;
-    }
-
 
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground();
-        gradientDrawable.setCornerRadius(cornerRadius != -1 ? toDp(cornerRadius) : R.dimen.default_corner_radius);
-        gradientDrawable.setStroke(toDp(strokeWidth), strokeColor);
+        gradientDrawable.setCornerRadius(cornerRadius != -1 ? StyleableToastUtils.toDp(getContext(), cornerRadius) : R.dimen.default_corner_radius);
+        gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
 
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
@@ -180,11 +160,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
         if (fontId > 0) {
             textView.setTypeface(ResourcesCompat.getFont(getContext(), fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
-        } else if (typeface != null) {
-            //TODO ----- DEPRECATED CODE ----- TO BE DELETED
-            textView.setTypeface(typeface, textBold ? Typeface.BOLD : Typeface.NORMAL);
-        } else if (textBold) {
-            textView.setTypeface(textView.getTypeface(), textBold ? Typeface.BOLD : Typeface.NORMAL);
         }
     }
 
@@ -265,14 +240,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
         fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
         isTextSizeFromStyleXml = textSize > 0;
-
-        //TODO ----- DEPRECATED CODE ---TO BE DELETED--
-        String textFontPath = typedArray.getString(R.styleable.StyleableToast_textFont);
-        if (textFontPath != null) {
-            if (textFontPath.contains("fonts/") && (textFontPath.contains(".otf") || textFontPath.contains(".ttf"))) {
-                typeface = Typeface.createFromAsset(getContext().getAssets(), textFontPath);
-            }
-        }
     }
 
 
@@ -282,37 +249,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         }
         iconResLeft = typedArray.getResourceId(R.styleable.StyleableToast_iconLeft, 0);
         iconResRight = typedArray.getResourceId(R.styleable.StyleableToast_iconRight, 0);
-    }
-
-    //TODO ----- DEPRECATED CODE ---TO BE DELETED--
-    public Animation getAnimation() {
-        if (hasAnimation) {
-            RotateAnimation anim = new RotateAnimation(0.0f, 360.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            anim.setInterpolator(new LinearInterpolator());
-            anim.setRepeatCount(Animation.INFINITE);
-            anim.setDuration(1000);
-            return anim;
-        }
-        return null;
-
-    }
-    //TODO ----- DEPRECATED CODE ---TO BE DELETED--
-
-    /**
-     * A callback that automatically cancels and resets animation effect from spinIcon(); when the StyleableToastListener is finished showing on screen.
-     * Users should not call this method as this is used internally in the library.
-     */
-    @Override
-    public void onToastFinished() {
-        if (getAnimation() != null) {
-            getAnimation().cancel();
-            getAnimation().reset();
-        }
-    }
-
-
-    private int toDp(int value) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, getResources().getDisplayMetrics());
     }
 
     public static class Builder {
@@ -327,7 +263,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
         private int length;
         private float textSize;
         private boolean solidBackground;
-        private boolean hasAnimation;
         private boolean textBold;
         private String text;
         private Typeface typeface;
@@ -355,17 +290,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
         public Builder textSize(float textSize) {
             this.textSize = textSize;
-            return this;
-        }
-
-        //TODO TO BE DELTED
-
-        /**
-         * Use the new method {@link #font(int)} instead.
-         */
-        @Deprecated
-        public Builder typeface(Typeface typeface) {
-            this.typeface = typeface;
             return this;
         }
 
@@ -408,17 +332,6 @@ public class StyleableToast extends LinearLayout implements OnToastFinishedListe
 
         public Builder iconResRight(@DrawableRes int iconResRight) {
             this.iconResRight = iconResRight;
-            return this;
-        }
-
-        //TODO TO BE DELTED
-
-        /**
-         * Enables spinning animation of the passed iconResLeft by its around its own center.
-         */
-        @Deprecated
-        public Builder spinIcon() {
-            this.hasAnimation = true;
             return this;
         }
 
