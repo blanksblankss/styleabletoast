@@ -3,27 +3,34 @@
 [![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/Muddz/StyleableToast/raw/master/demo.apk)
 [![LICENSE](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://github.com/Muddz/StyleableToast/blob/master/LICENSE)
 
-An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml!
+An Android library that takes the standard Android toast to the next level with many styling options that gives your app and user experience an extra unique feeling! Style your toasts either by code or define styles in styles.xml.
+See examples below or try the demo app.
 
 
-## Release note version: 2.0.1 |  18 December 2017
-Important! Read the changes from `1.0.9` To `2.0.1` before updating!
 
-- replaced alpha() with solidBackground()
-- replaced strokeWidth() and strokeColor() with stroke(width,color)
-- Removed getToast() and build()
-- Removed 4 lines text limit
-- added iconLeft() & iconRight()
-- added textSize()
-- deprecated typeface(). Use font() with the new Font api in Android 8 -> R.font.xx
-- added new custom styles.xml attribute. See below!
-- added new makeText() constructor without length parameter
-- Adjusted the default paddings and values for the toast
-- Over all refactoring
+
+> ## Release notes
+>   Version 2.0.2
+> - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
+>
+>Version 2.0.1 - Important! Read changes from `1.0.9` before updating to a `2.x.x` version
+>
+> - Replaced `alpha()` with `solidBackground()`
+> - Replaced `strokeWidth()` and `strokeColor()` with `stroke(width,color)`
+> - Removed `getToast()` and `build()`
+> - Removed 4 lines text limit
+> - Added `iconLeft()` & `iconRight()`
+> - Added `textSize()`
+> - Deprecated `typeface()` Use `font()` with the new Font api in Android 8 -> R.font.xx
+> - Added new custom styles.xml attribute. See below!
+> - Added new `makeText()` constructor without length parameter
+> - Adjusted the default paddings and values for the toast
+> - Over all refactoring
+
 
 ## Cases:
 
-<img src="https://github.com/Muddz/StyleableToast/blob/master/cases.png" width="80%">
+<img src="https://github.com/Muddz/StyleableToast/blob/master/cases.png" width="75%">
 
 
 ## Example with a style from styles.xml
@@ -69,7 +76,7 @@ Important! Read the changes from `1.0.9` To `2.0.1` before updating!
 Add the depedency in your `build.gradle`
 ```groovy
 dependencies {
-    implementation 'com.muddzdev:styleabletoast:2.0.1'   
+    implementation 'com.muddzdev:styleabletoast:2.0.2'   
 }
 ```
 
