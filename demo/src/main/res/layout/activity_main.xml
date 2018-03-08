@@ -10,10 +10,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:textColor="#414141"
-        android:text="Example of different styles"
-        android:textSize="16sp" />
+        android:layout_marginBottom="10dp"
+        android:text="Example of different StyleableToast styles"
+        android:textColor="#696969"
+       />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="10dp"
+        android:background="#e2e2e2" />
 
 
     <ScrollView
