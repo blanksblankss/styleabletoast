@@ -139,8 +139,6 @@ public class StyleableToast extends LinearLayout {
         }
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
-        } else {
-            gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
         }
 
         rootLayout.setBackground(gradientDrawable);
@@ -305,6 +303,9 @@ public class StyleableToast extends LinearLayout {
             return this;
         }
 
+        /**
+         * This call will make the StyleableToast's background completely solid without any opacity.
+         */
         public Builder solidBackground() {
             this.solidBackground = true;
             return this;

@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
+                        .solidBackground()
                         .show();
             }
         });
@@ -37,7 +38,10 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Hello World", Toast.LENGTH_LONG).show();
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Hello World")
+                        .length(Toast.LENGTH_LONG)
+                        .show();
             }
         });
 
