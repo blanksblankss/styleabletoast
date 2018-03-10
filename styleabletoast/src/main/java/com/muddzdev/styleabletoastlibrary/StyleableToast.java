@@ -116,6 +116,7 @@ public class StyleableToast extends LinearLayout {
         styleableToast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         styleableToast.setView(rootLayout);
         styleableToast.show();
+
     }
 
     public void cancel() {
@@ -127,16 +128,15 @@ public class StyleableToast extends LinearLayout {
 
     private void makeShape() {
         loadShapeAttributes();
-        GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground();
-        gradientDrawable.setCornerRadius(cornerRadius != -1 ? StyleableToastUtils.toDp(getContext(), cornerRadius) : R.dimen.default_corner_radius);
+        GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground().mutate();
         gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
 
+        if (cornerRadius > -1) {
+            gradientDrawable.setCornerRadius(StyleableToastUtils.toDp(getContext(), cornerRadius));
+        }
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
-        } else {
-            gradientDrawable.setColor(ContextCompat.getColor(getContext(), R.color.backgroundColor));
         }
-
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
         } else {
@@ -215,7 +215,7 @@ public class StyleableToast extends LinearLayout {
         }
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
-        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), R.color.backgroundColor));
+        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), R.color.default_background_color));
         cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, R.dimen.default_corner_radius);
 
         if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
@@ -265,8 +265,8 @@ public class StyleableToast extends LinearLayout {
         private boolean solidBackground;
         private boolean textBold;
         private String text;
-        private final Context context;
         private StyleableToast styleableToast;
+        private final Context context;
 
         public Builder(@NonNull Context context) {
             this.context = context;

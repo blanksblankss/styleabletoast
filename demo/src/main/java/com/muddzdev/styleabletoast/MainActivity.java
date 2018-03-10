@@ -27,17 +27,17 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StyleableToast.makeText(MainActivity.this, "Hello World", R.style.allStyles).show();
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Hello World")
+                        .length(Toast.LENGTH_LONG)
+                        .show();
             }
         });
 
         findViewById(R.id.backgroundcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
-                        .show();
-
+                Toast.makeText(MainActivity.this, "Hello World", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
+                        .iconResLeft(R.drawable.ic_ring_volume_black_24dp)
                         .show();
             }
         });
