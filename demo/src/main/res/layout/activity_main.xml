@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:background="#000"
     android:paddingTop="24dp">
 
     <LinearLayout
@@ -170,5 +169,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:visibility="gone" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Det er forskernes vurdering, at 'Disease X' ved hjælp af moderne genteknologi kan se dagens lys via et uheld eller et terrorangreb. Det kan altså ende med at blive skabt af mennesker i takt med, at brugen og udviklingen af kemiske og biologiske våben vokser. Menneskeskabte vira og sygdomme er særligt farlige, fordi mennesker ikke har opbygget resistens over for dem.Det er forskernes vurdering, at 'Disease X' ved hjælp af moderne genteknologi kan se dagens lys via et uheld eller et terrorangreb. Det kan altså ende med at blive skabt af mennesker i takt med, at brugen og udviklingen af kemiske og biologiske våben vokser. Menneskeskabte vira og sygdomme er særligt farlige, fordi mennesker ikke har opbygget resistens over for dem." />
 
 </RelativeLayout>

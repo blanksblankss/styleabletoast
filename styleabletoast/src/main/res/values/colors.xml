@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="default_background_color">#e6444444</color>
+    <color name="default_background_color">#E6555555</color>
     <color name="default_text_color">#ffffff</color>
 
     <color name="default_background_color_oreo">#E6EEEEEE</color>

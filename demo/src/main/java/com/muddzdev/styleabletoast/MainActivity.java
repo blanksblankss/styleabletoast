@@ -27,11 +27,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
-                        .length(Toast.LENGTH_LONG)
-                        .solidBackground()
-                        .show();
             }
         });
 
@@ -48,11 +43,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.textcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
-                        .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_ring_volume_black_24dp)
-                        .show();
+                Toast.makeText(MainActivity.this, "Hello World", Toast.LENGTH_SHORT).show();
             }
         });
 
