@@ -27,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Hello World")
+                        .length(Toast.LENGTH_LONG)
+                        .iconResLeft(R.drawable.ic_cloud_upload_black_24dp)
+                        .show();
             }
         });
 
@@ -36,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
+                        .iconResLeft(R.drawable.ic_autorenew_black_24dp)
                         .show();
             }
         });
@@ -43,7 +49,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.textcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Hello World", Toast.LENGTH_SHORT).show();
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Hello World")
+                        .length(Toast.LENGTH_LONG)
+                        .iconResLeft(R.drawable.ic_file_download)
+                        .show();
             }
         });
 

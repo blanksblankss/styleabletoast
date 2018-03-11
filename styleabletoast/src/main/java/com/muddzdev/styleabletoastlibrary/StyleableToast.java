@@ -16,6 +16,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.widget.TextViewCompat;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -164,42 +165,46 @@ public class StyleableToast extends LinearLayout {
 
     private void makeIcon() {
         loadIconAttributes();
-
         int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
         int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
         int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding);
-
         int iconSize = (int) getResources().getDimension(R.dimen.icon_size);
 
         if (iconResLeft != 0) {
             Drawable drawable = ContextCompat.getDrawable(getContext(), iconResLeft);
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
+                TextViewCompat.setCompoundDrawablesRelative(textView, drawable, null, null, null);
+                if (StyleableToastUtils.isRTL()) {
+                    rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
+                } else {
+                    rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
+                }
             }
-            textView.setCompoundDrawables(drawable, null, null, null);
-            rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
         }
 
         if (iconResRight != 0) {
             Drawable drawable = ContextCompat.getDrawable(getContext(), iconResRight);
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
+                TextViewCompat.setCompoundDrawablesRelative(textView, null, null, drawable, null);
+                if (StyleableToastUtils.isRTL()) {
+                    rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
+                } else {
+                    rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
+                }
             }
-            textView.setCompoundDrawables(null, null, drawable, null);
-            rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
         }
 
         if (iconResLeft != 0 && iconResRight != 0) {
             Drawable drawableLeft = ContextCompat.getDrawable(getContext(), iconResLeft);
-            if (drawableLeft != null) {
-                drawableLeft.setBounds(0, 0, iconSize, iconSize);
-            }
             Drawable drawableRight = ContextCompat.getDrawable(getContext(), iconResRight);
-            if (drawableRight != null) {
+            if (drawableLeft != null && drawableRight != null) {
+                drawableLeft.setBounds(0, 0, iconSize, iconSize);
                 drawableRight.setBounds(0, 0, iconSize, iconSize);
+                textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
+                rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingNoIcon, paddingVertical);
             }
-            textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
-            rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingNoIcon, paddingVertical);
         }
     }
 
