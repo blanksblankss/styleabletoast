@@ -5,22 +5,7 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="24dp">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:text="Example of different StyleableToast styles"
-        android:textColor="#696969"
-       />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginBottom="10dp"
-        android:background="#e2e2e2" />
-
+    android:paddingTop="16dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -32,54 +17,53 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <Button
-                style="@style/DemoButton"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Background color" />
+                android:orientation="vertical">
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Text color" />
+                <Button
+                    android:id="@+id/b1"
+                    style="@style/DemoButton"
+                    android:text="Colored background" />
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Icons" />
+                <Button
+                    android:id="@+id/b2"
+                    style="@style/DemoButton"
+                    android:text="Colored text" />
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Corner 8 dp" />
+                <Button
+                    android:id="@+id/b3"
+                    style="@style/DemoButton"
+                    android:text="Custom font" />
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Corner 15 dp" />
+                <Button
+                    android:id="@+id/b4"
+                    style="@style/DemoButton"
+                    android:text="Corner radius: 5dp" />
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Full solid background" />
+                <Button
+                    android:id="@+id/b5"
+                    style="@style/DemoButton"
+                    android:text="Icon left" />
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Custom font" />
+                <Button
+                    android:id="@+id/b6"
+                    style="@style/DemoButton"
+                    android:text="Icon right" />
 
-            <Button
-                style="@style/DemoButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="bold text" />
+                <Button
+                    android:id="@+id/b7"
+                    style="@style/DemoButton"
+                    android:text="Icon left + right " />
+
+                <Button
+                    android:id="@+id/b8"
+                    style="@style/DemoButton"
+                    android:text="All styles" />
+
+            </LinearLayout>
+
         </LinearLayout>
-
     </ScrollView>
 </LinearLayout>
