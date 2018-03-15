@@ -37,6 +37,10 @@ import android.widget.Toast;
 //        See the License for the specific language governing permissions and
 //        limitations under the License.
 
+//TODO -- Test default values from XML and builder pattern for Android O
+//TODO -- Add Gravity method
+//TODO -- Move API 21 checks to Utils
+//TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
 
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
@@ -45,8 +49,8 @@ public class StyleableToast extends LinearLayout {
     private int backgroundColor;
     private int strokeColor;
     private int strokeWidth;
-    private int iconResLeft;
-    private int iconResRight;
+    private int iconStart;
+    private int iconEnd;
     private int textColor;
     private int fontId;
     private int length;
@@ -80,8 +84,8 @@ public class StyleableToast extends LinearLayout {
         super(builder.context);
         this.backgroundColor = builder.backgroundColor;
         this.cornerRadius = builder.cornerRadius;
-        this.iconResRight = builder.iconResRight;
-        this.iconResLeft = builder.iconResLeft;
+        this.iconEnd = builder.iconEnd;
+        this.iconStart = builder.iconStart;
         this.strokeColor = builder.strokeColor;
         this.strokeWidth = builder.strokeWidth;
         this.solidBackground = builder.solidBackground;
@@ -130,6 +134,8 @@ public class StyleableToast extends LinearLayout {
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground().mutate();
+
+        //TODO SHOULD THIS BE WRAPPED IN A IF-CONDITION AND WILL THIS WORK BELOW 21?
         gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
 
         if (cornerRadius > -1) {
@@ -138,6 +144,8 @@ public class StyleableToast extends LinearLayout {
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
         }
+
+        //TODO CHECK IF THIS WORKS ALLRIGHT WITH ANDROID 0
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
         }
@@ -146,7 +154,7 @@ public class StyleableToast extends LinearLayout {
     }
 
     private void makeTextView() {
-        loadTextViewStyleAttributes();
+        loadTextViewAttributes();
         textView.setText(text);
 
         if (textColor != 0) {
@@ -165,13 +173,16 @@ public class StyleableToast extends LinearLayout {
 
     private void makeIcon() {
         loadIconAttributes();
+
+        //TODO MAKE VERTICAL AND HORIZONTAL VALUES FOR ANDROID 0!!!!
+
         int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
         int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
         int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding);
         int iconSize = (int) getResources().getDimension(R.dimen.icon_size);
 
-        if (iconResLeft != 0) {
-            Drawable drawable = ContextCompat.getDrawable(getContext(), iconResLeft);
+        if (iconStart != 0) {
+            Drawable drawable = ContextCompat.getDrawable(getContext(), iconStart);
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, drawable, null, null, null);
@@ -183,8 +194,8 @@ public class StyleableToast extends LinearLayout {
             }
         }
 
-        if (iconResRight != 0) {
-            Drawable drawable = ContextCompat.getDrawable(getContext(), iconResRight);
+        if (iconEnd != 0) {
+            Drawable drawable = ContextCompat.getDrawable(getContext(), iconEnd);
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, null, null, drawable, null);
@@ -196,9 +207,9 @@ public class StyleableToast extends LinearLayout {
             }
         }
 
-        if (iconResLeft != 0 && iconResRight != 0) {
-            Drawable drawableLeft = ContextCompat.getDrawable(getContext(), iconResLeft);
-            Drawable drawableRight = ContextCompat.getDrawable(getContext(), iconResRight);
+        if (iconStart != 0 && iconEnd != 0) {
+            Drawable drawableLeft = ContextCompat.getDrawable(getContext(), iconStart);
+            Drawable drawableRight = ContextCompat.getDrawable(getContext(), iconEnd);
             if (drawableLeft != null && drawableRight != null) {
                 drawableLeft.setBounds(0, 0, iconSize, iconSize);
                 drawableRight.setBounds(0, 0, iconSize, iconSize);
@@ -217,9 +228,12 @@ public class StyleableToast extends LinearLayout {
             return;
         }
 
+        int defaultBackgroundColor = StyleableToastUtils.isOreo() ? R.color.default_background_color_oreo : R.color.default_background_color;
+        int defaultCornerRadius = StyleableToastUtils.isOreo() ? R.dimen.default_corner_radius_oreo : R.dimen.default_corner_radius;
+
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
-        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), R.color.default_background_color));
-        cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, R.dimen.default_corner_radius);
+        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), defaultBackgroundColor));
+        cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, getResources().getDimension(defaultCornerRadius));
 
         if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
             length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
@@ -233,12 +247,13 @@ public class StyleableToast extends LinearLayout {
         }
     }
 
-    private void loadTextViewStyleAttributes() {
+    private void loadTextViewAttributes() {
         if (style == 0) {
             return;
         }
 
-        textColor = typedArray.getColor(R.styleable.StyleableToast_textColor, Color.WHITE);
+        //TODO TEST THIS
+        textColor = typedArray.getColor(R.styleable.StyleableToast_textColor, textView.getCurrentTextColor());
         textBold = typedArray.getBoolean(R.styleable.StyleableToast_textBold, false);
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
         fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
@@ -250,8 +265,8 @@ public class StyleableToast extends LinearLayout {
         if (style == 0) {
             return;
         }
-        iconResLeft = typedArray.getResourceId(R.styleable.StyleableToast_iconLeft, 0);
-        iconResRight = typedArray.getResourceId(R.styleable.StyleableToast_iconRight, 0);
+        iconStart = typedArray.getResourceId(R.styleable.StyleableToast_iconStart, 0);
+        iconEnd = typedArray.getResourceId(R.styleable.StyleableToast_iconEnd, 0);
     }
 
     public static class Builder {
@@ -259,8 +274,8 @@ public class StyleableToast extends LinearLayout {
         private int backgroundColor;
         private int strokeColor;
         private int strokeWidth;
-        private int iconResLeft;
-        private int iconResRight;
+        private int iconStart;
+        private int iconEnd;
         private int textColor;
         private int fontId;
         private int length;
@@ -330,13 +345,31 @@ public class StyleableToast extends LinearLayout {
             return this;
         }
 
+        @Deprecated
+        /**
+         * Replaced with iconStart() for better naming for RTL support
+         */
         public Builder iconResLeft(@DrawableRes int iconResLeft) {
-            this.iconResLeft = iconResLeft;
+            this.iconStart = iconResLeft;
             return this;
         }
 
+        @Deprecated
+        /**
+         * Replaced with iconEnd() for better naming for RTL support
+         */
         public Builder iconResRight(@DrawableRes int iconResRight) {
-            this.iconResRight = iconResRight;
+            this.iconEnd = iconResRight;
+            return this;
+        }
+
+        public Builder iconStart(@DrawableRes int iconStart) {
+            this.iconStart = iconStart;
+            return this;
+        }
+
+        public Builder iconEnd(@DrawableRes int iconEnd) {
+            this.iconEnd = iconEnd;
             return this;
         }
 

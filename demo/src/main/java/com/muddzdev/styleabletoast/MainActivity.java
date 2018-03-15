@@ -28,9 +28,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
+                        .text("Android O!!")
+                        .backgroundColor(Color.RED)
+                        .textColor(Color.WHITE)
+                        .textBold()
                         .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_cloud_upload_black_24dp)
                         .show();
             }
         });
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
                         .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_autorenew_black_24dp)
+                        .iconResLeft(R.drawable.ic_file_download)
                         .show();
             }
         });
@@ -51,8 +53,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
-                        .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_file_download)
                         .show();
             }
         });
