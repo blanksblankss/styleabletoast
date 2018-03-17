@@ -196,7 +196,7 @@ public class StyleableToast extends LinearLayout {
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, null, null, drawable, null);
-                if (StyleableToastUtils.is()) {
+                if (StyleableToastUtils.isRTL()) {
                     rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
                 } else {
                     rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
