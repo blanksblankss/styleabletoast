@@ -27,7 +27,14 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.strokecolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                StyleableToast.makeText(MainActivity.this, "Hello World", R.style.allStyles).show();
+                new StyleableToast.Builder(MainActivity.this)
+                        .text("Android O!!")
+                        .backgroundColor(Color.RED)
+                        .textColor(Color.WHITE)
+                        .stroke(1, Color.BLUE)
+                        .textBold()
+                        .length(Toast.LENGTH_LONG)
+                        .show();
             }
         });
 
@@ -36,19 +43,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new StyleableToast.Builder(MainActivity.this)
                         .text("Hello World")
+                        .length(Toast.LENGTH_LONG)
+                        .iconResLeft(R.drawable.ic_file_download)
                         .show();
-
             }
         });
 
         findViewById(R.id.textcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
-                        .length(Toast.LENGTH_LONG)
-                        .iconResLeft(R.drawable.ic_airplanemode_inactive_black_24dp)
-                        .show();
+                StyleableToast.makeText(getApplicationContext(), "Hello", R.style.style2).show();
             }
         });
 

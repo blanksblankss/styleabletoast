@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="backgroundColor">#e6444444</color>
-    <color name="textColor">#ffffff</color>
+    <color name="default_background_color">#E6555555</color>
+    <color name="default_text_color">#ffffff</color>
 
-    <color name="androidO_backgroundColor">#f0f0f0</color>
-    <color name="androidO_textColor">#000</color>
+    <color name="default_background_color_oreo">#E6EEEEEE</color>
+    <color name="default_text_color_oreo">#de000000</color>
 
 </resources>

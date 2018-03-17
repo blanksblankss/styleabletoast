@@ -4,22 +4,19 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_toast"
-    android:paddingBottom="@dimen/toast_vertical_padding"
-    android:paddingLeft="@dimen/toast_horizontal_padding"
-    android:paddingRight="@dimen/toast_horizontal_padding"
-    android:paddingTop="@dimen/toast_vertical_padding">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:drawablePadding="@dimen/drawable_padding"
-        android:fontFamily="sans-serif-condensed"
+        android:fontFamily="sans-serif"
         android:gravity="center"
-        android:shadowColor="#BB000000"
-        android:shadowRadius="2.75"
-        android:textColor="@color/default_text_color"
-        android:textSize="@dimen/default_text_size"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="15dp"
+        android:textColor="@color/default_text_color_oreo"
+        android:textSize="@dimen/default_text_size_oreo"
         tools:text="Hello World" />
-
 </LinearLayout>
