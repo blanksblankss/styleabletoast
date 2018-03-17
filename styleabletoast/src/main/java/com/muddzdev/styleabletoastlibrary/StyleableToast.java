@@ -39,7 +39,6 @@ import android.widget.Toast;
 
 //TODO -- Test default values from XML and builder pattern for Android O
 //TODO -- Add Gravity method
-//TODO -- Move API 21 checks to Utils
 //TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
 
 @SuppressLint("ViewConstructor")
@@ -121,8 +120,8 @@ public class StyleableToast extends LinearLayout {
         styleableToast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         styleableToast.setView(rootLayout);
         styleableToast.show();
-
     }
+
 
     public void cancel() {
         if (styleableToast != null) {
@@ -134,22 +133,19 @@ public class StyleableToast extends LinearLayout {
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground().mutate();
-
-        //TODO SHOULD THIS BE WRAPPED IN A IF-CONDITION AND WILL THIS WORK BELOW 21?
-        gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
-
+        if (strokeWidth > 0) {
+            gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
+        }
         if (cornerRadius > -1) {
             gradientDrawable.setCornerRadius(StyleableToastUtils.toDp(getContext(), cornerRadius));
         }
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
         }
-
-        //TODO CHECK IF THIS WORKS ALLRIGHT WITH ANDROID 0
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
+            //TODO CHECK IF THIS WORKS ALLRIGHT WITH ANDROID 0
         }
-
         rootLayout.setBackground(gradientDrawable);
     }
 
@@ -239,11 +235,9 @@ public class StyleableToast extends LinearLayout {
             length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
         }
 
-        if (Build.VERSION.SDK_INT >= 21) {
-            if (typedArray.hasValue(R.styleable.StyleableToast_strokeColor) && typedArray.hasValue(R.styleable.StyleableToast_strokeWidth)) {
-                strokeWidth = (int) typedArray.getDimension(R.styleable.StyleableToast_strokeWidth, 0);
-                strokeColor = typedArray.getColor(R.styleable.StyleableToast_strokeColor, Color.TRANSPARENT);
-            }
+        if (typedArray.hasValue(R.styleable.StyleableToast_strokeColor) && typedArray.hasValue(R.styleable.StyleableToast_strokeWidth)) {
+            strokeWidth = (int) typedArray.getDimension(R.styleable.StyleableToast_strokeWidth, 0);
+            strokeColor = typedArray.getColor(R.styleable.StyleableToast_strokeColor, Color.TRANSPARENT);
         }
     }
 

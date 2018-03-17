@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
                         .text("Android O!!")
                         .backgroundColor(Color.RED)
                         .textColor(Color.WHITE)
+                        .stroke(1, Color.BLUE)
                         .textBold()
                         .length(Toast.LENGTH_LONG)
                         .show();
@@ -51,9 +52,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.textcolor_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new StyleableToast.Builder(MainActivity.this)
-                        .text("Hello World")
-                        .show();
+                StyleableToast.makeText(getApplicationContext(), "Hello", R.style.style2).show();
             }
         });
 
