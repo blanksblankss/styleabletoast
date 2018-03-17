@@ -39,6 +39,7 @@ import android.widget.Toast;
 //TODO -- Test default values from XML and builder pattern for Android O
 //TODO -- Add Gravity method
 //TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
+//TODO -- FIX default bagrundcolor and default alpha for android o style
 
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
@@ -132,6 +133,7 @@ public class StyleableToast extends LinearLayout {
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground().mutate();
+        gradientDrawable.setAlpha(R.integer.defaultBackgroundAlpha);
 
         if (strokeWidth > 0) {
             gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
@@ -142,27 +144,28 @@ public class StyleableToast extends LinearLayout {
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
         }
+
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
-            //TODO CHECK IF THIS WORKS ALLRIGHT WITH ANDROID 0
         }
+
         rootLayout.setBackground(gradientDrawable);
     }
 
     private void makeTextView() {
         loadTextViewAttributes();
         textView.setText(text);
-
         if (textColor != 0) {
             textView.setTextColor(textColor);
         }
-
         if (textSize > 0) {
             textView.setTextSize(isTextSizeFromStyleXml ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
         }
-
         if (fontId > 0) {
             textView.setTypeface(ResourcesCompat.getFont(getContext(), fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
+        }
+        if (textBold && fontId == 0) {
+            textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
         }
     }
 
@@ -173,8 +176,8 @@ public class StyleableToast extends LinearLayout {
         //TODO MAKE VERTICAL AND HORIZONTAL VALUES FOR ANDROID 0!!!!
 
         int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
-        int paddingHorizontal = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
-        int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding);
+        int paddingHorizontal1 = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
+        int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_empty_side);
         int iconSize = (int) getResources().getDimension(R.dimen.icon_size);
 
         if (iconStart != 0) {
@@ -183,9 +186,9 @@ public class StyleableToast extends LinearLayout {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, drawable, null, null, null);
                 if (StyleableToastUtils.isRTL()) {
-                    rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
+                    rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal1, paddingVertical);
                 } else {
-                    rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
+                    rootLayout.setPadding(paddingHorizontal1, paddingVertical, paddingNoIcon, paddingVertical);
                 }
             }
         }
@@ -196,9 +199,9 @@ public class StyleableToast extends LinearLayout {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, null, null, drawable, null);
                 if (StyleableToastUtils.isRTL()) {
-                    rootLayout.setPadding(paddingHorizontal, paddingVertical, paddingNoIcon, paddingVertical);
+                    rootLayout.setPadding(paddingHorizontal1, paddingVertical, paddingNoIcon, paddingVertical);
                 } else {
-                    rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal, paddingVertical);
+                    rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal1, paddingVertical);
                 }
             }
         }
@@ -210,7 +213,7 @@ public class StyleableToast extends LinearLayout {
                 drawableLeft.setBounds(0, 0, iconSize, iconSize);
                 drawableRight.setBounds(0, 0, iconSize, iconSize);
                 textView.setCompoundDrawables(drawableLeft, null, drawableRight, null);
-                rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingNoIcon, paddingVertical);
+                rootLayout.setPadding(paddingHorizontal1, paddingVertical, paddingHorizontal1, paddingVertical);
             }
         }
     }

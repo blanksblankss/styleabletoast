@@ -32,38 +32,49 @@
                     style="@style/DemoButton"
                     android:text="Colored text" />
 
+
                 <Button
                     android:id="@+id/b3"
                     style="@style/DemoButton"
-                    android:text="Custom font" />
+                    android:text="Colored bold text" />
 
                 <Button
                     android:id="@+id/b4"
                     style="@style/DemoButton"
-                    android:text="Corner radius: 5dp" />
+                    android:text="Custom font" />
 
                 <Button
                     android:id="@+id/b5"
                     style="@style/DemoButton"
-                    android:text="Icon left" />
+                    android:text="Corner radius: 5dp" />
 
                 <Button
                     android:id="@+id/b6"
                     style="@style/DemoButton"
-                    android:text="Icon right" />
+                    android:text="Icon start" />
 
                 <Button
                     android:id="@+id/b7"
                     style="@style/DemoButton"
-                    android:text="Icon left + right " />
+                    android:text="Icon end" />
 
                 <Button
                     android:id="@+id/b8"
                     style="@style/DemoButton"
+                    android:text="Icon start + end " />
+
+                <Button
+                    android:id="@+id/b9"
+                    style="@style/DemoButton"
                     android:text="All styles" />
-
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <TextView
+        android:textColor="#000"
+        android:text="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>

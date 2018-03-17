@@ -1,50 +1,95 @@
 package com.muddzdev.styleabletoast;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.widget.Toast;
 
-import butterknife.BindView;
+import com.muddzdev.styleabletoastlibrary.StyleableToast;
+
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.b1)
-    Button b1;
-    @BindView(R.id.b2)
-    Button b2;
-    @BindView(R.id.b3)
-    Button b3;
-    @BindView(R.id.b4)
-    Button b4;
-    @BindView(R.id.b5)
-    Button b5;
-    @BindView(R.id.b6)
-    Button b6;
-    @BindView(R.id.b7)
-    Button b7;
-    @BindView(R.id.b8)
-    Button b8;
+    String toastMsg = "Hello World!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        b1.setOnClickListener(this);
-        b2.setOnClickListener(this);
-        b3.setOnClickListener(this);
-        b4.setOnClickListener(this);
-        b5.setOnClickListener(this);
-        b6.setOnClickListener(this);
-        b7.setOnClickListener(this);
-        b8.setOnClickListener(this);
     }
 
+    @OnClick(R.id.b1)
+    public void coloredBackground() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+//                .backgroundColor(Color.parseColor("#E55F63"))
+                .show();
+    }
 
-    @Override
-    public void onClick(View v) {
+    @OnClick(R.id.b2)
+    public void coloredText() {
+        Toast.makeText(this, toastMsg, Toast.LENGTH_SHORT).show();
+//        new StyleableToast.Builder(this)
+//                .text(toastMsg)
+//                .textColor(Color.CYAN)
+//                .show();
+    }
+
+    @OnClick(R.id.b3)
+    public void coloredBoldText() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .textColor(Color.CYAN)
+                .textBold()
+                .show();
+    }
+
+    @OnClick(R.id.b4)
+    public void customFont() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .font(R.font.dosis)
+                .show();
+    }
+
+    @OnClick(R.id.b5)
+    public void cornerRadius5dp() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .cornerRadius(5)
+                .show();
+    }
+
+    @OnClick(R.id.b6)
+    public void iconStart() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .iconStart(R.drawable.ic_airplanemode_inactive_black_24dp)
+                .show();
+    }
+
+    @OnClick(R.id.b7)
+    public void iconEnd() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .iconEnd(R.drawable.ic_airplanemode_inactive_black_24dp)
+                .show();
+    }
+
+    @OnClick(R.id.b8)
+    public void iconStartEnd() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .iconStart(R.drawable.ic_airplanemode_inactive_black_24dp)
+                .iconEnd(R.drawable.ic_airplanemode_inactive_black_24dp)
+                .show();
+    }
+
+    @OnClick(R.id.b9)
+    public void allStyles() {
 
     }
 }
