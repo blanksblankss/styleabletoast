@@ -7,23 +7,9 @@ An Android library that takes the standard toast to the next level with many sty
 
 
 
-> ## Release notes
->   Version 2.0.2
+> ### Release notes: version 2.0.2
+>   
 > - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
->
->Version 2.0.1 - Important! Read changes from `1.0.9` before updating to a `2.x.x` version
->
-> - Replaced `alpha()` with `solidBackground()`
-> - Replaced `strokeWidth()` and `strokeColor()` with `stroke(width,color)`
-> - Removed `getToast()` and `build()`
-> - Removed 4 lines text limit
-> - Added `iconLeft()` & `iconRight()`
-> - Added `textSize()`
-> - Deprecated `typeface()` Use `font()` with the new Font api in Android 8 -> R.font.xx
-> - Added new custom styles.xml attribute. See below!
-> - Added new `makeText()` constructor without length parameter
-> - Adjusted the default paddings and values for the toast
-> - Over all refactoring
 
 
 ## Cases:
@@ -46,7 +32,7 @@ An Android library that takes the standard toast to the next level with many sty
         <item name="strokeColor">#fff</item>    API 21+
         <item name="iconLeft">@drawable/ic</item>
         <item name="iconRight">@drawable/ic</item>
-        <item name="length">LONG</item>         ENUM: LONG | SHORT
+        <item name="length">LONG</item> LONG or SHORT
         <item name="cornerRadius">5dp</item>
     </style>
 
