@@ -7,7 +7,7 @@ An Android library that takes the standard toast to the next level with many sty
 
 
 
-> ### Release notes: *version 2.0.2*
+> ### Release notes: version 2.0.2
 >   
 > - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
 
