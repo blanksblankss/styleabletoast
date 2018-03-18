@@ -5,26 +5,9 @@
 
 An Android library that takes the standard toast to the next level with many styling options. Style your toasts either by code or define styles in styles.xml. See examples below or try the demo app.
 
-
-
-> ## Release notes
->   Version 2.0.2
-> - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
->
->Version 2.0.1 - Important! Read changes from `1.0.9` before updating to a `2.x.x` version
->
-> - Replaced `alpha()` with `solidBackground()`
-> - Replaced `strokeWidth()` and `strokeColor()` with `stroke(width,color)`
-> - Removed `getToast()` and `build()`
-> - Removed 4 lines text limit
-> - Added `iconLeft()` & `iconRight()`
-> - Added `textSize()`
-> - Deprecated `typeface()` Use `font()` with the new Font api in Android 8 -> R.font.xx
-> - Added new custom styles.xml attribute. See below!
-> - Added new `makeText()` constructor without length parameter
-> - Adjusted the default paddings and values for the toast
-> - Over all refactoring
-
+#### [Release note](/CHANGELOG.md) in 2.0.2
+----------------------------
+* int arguments in `cornerRadius(int radius)` and `stroke(width, color)` is now converted to `DP` by the library
 
 ## Cases:
 
