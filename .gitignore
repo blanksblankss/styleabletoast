@@ -89,7 +89,7 @@ obj/
 
 # IntelliJ IDEA
 *.iws
-.idea/
+.idea
 /out/
 
 # User-specific configurations
