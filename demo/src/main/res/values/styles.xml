@@ -16,9 +16,16 @@
         <item name="android:layout_weight">1</item>
     </style>
 
-    <style name="allStyles">
+    <style name="AllStyles">
         <item name="length">LONG</item>
-
+        <item name="solidBackground">true</item>
+        <item name="colorBackground">#ff00</item>
+        <!--<item name="textColor">#0000ff</item>-->
+        <!--<item name="textSize">20sp</item>-->
+        <!--<item name="strokeWidth">3dp</item>-->
+        <!--<item name="strokeColor">#ffee00</item>-->
+        <!--<item name="cornerRadius">5dp</item>-->
+        <!--<item name="textBold">true</item>-->
     </style>
 
     <style name="style2">

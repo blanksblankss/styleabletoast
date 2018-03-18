@@ -14,6 +14,8 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     String toastMsg = "Hello World!";
+    int toastColor = Color.parseColor("#FF5A5F");
+    //TODO TEST ALL METHOD VIA XML LAYOUT TOO
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,28 +26,25 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.b1)
     public void coloredBackground() {
-
-        StyleableToast.makeText(this, toastMsg, R.style.style2).show();
-
-//        new StyleableToast.Builder(this)
-//                .text(toastMsg)
-//                .show();
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .backgroundColor(toastColor)
+                .show();
     }
 
     @OnClick(R.id.b2)
     public void coloredText() {
-        Toast.makeText(this, toastMsg, Toast.LENGTH_SHORT).show();
-//        new StyleableToast.Builder(this)
-//                .text(toastMsg)
-//                .textColor(Color.CYAN)
-//                .show();
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .textColor(toastColor)
+                .show();
     }
 
     @OnClick(R.id.b3)
     public void coloredBoldText() {
         new StyleableToast.Builder(this)
                 .text(toastMsg)
-                .textColor(Color.CYAN)
+                .textColor(toastColor)
                 .textBold()
                 .show();
     }
@@ -92,7 +91,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.b9)
-    public void allStyles() {
+    public void coloredStroke() {
+        new StyleableToast.Builder(this)
+                .text(toastMsg)
+                .stroke(2, Color.YELLOW)
+                .show();
+    }
 
+    @OnClick(R.id.b10)
+    public void allStyles() {
+        StyleableToast.makeText(this, toastMsg, R.style.AllStyles).show();
     }
 }

@@ -16,7 +16,6 @@ import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.TextViewCompat;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -37,10 +36,10 @@ import android.widget.Toast;
 //        See the License for the specific language governing permissions and
 //        limitations under the License.
 
-//TODO -- Test default values from XML and builder pattern for Android O
 //TODO -- Add Gravity method
 //TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
 //TODO -- Fix oversized toast when icon is added
+//TODO -- Make dimens, color and integer values for 27 api -> instead of adding them in the same file with oreo postfix!
 
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
@@ -137,7 +136,7 @@ public class StyleableToast extends LinearLayout {
         gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
 
         if (strokeWidth > 0) {
-            gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
+            gradientDrawable.setStroke(strokeWidth, strokeColor);
         }
         if (cornerRadius > -1) {
             gradientDrawable.setCornerRadius(cornerRadius);
@@ -186,7 +185,7 @@ public class StyleableToast extends LinearLayout {
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, drawable, null, null, null);
-                if (StyleableToastUtils.isRTL()) {
+                if (Utils.isRTL()) {
                     rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal1, paddingVertical);
                 } else {
                     rootLayout.setPadding(paddingHorizontal1, paddingVertical, paddingNoIcon, paddingVertical);
@@ -199,7 +198,7 @@ public class StyleableToast extends LinearLayout {
             if (drawable != null) {
                 drawable.setBounds(0, 0, iconSize, iconSize);
                 TextViewCompat.setCompoundDrawablesRelative(textView, null, null, drawable, null);
-                if (StyleableToastUtils.isRTL()) {
+                if (Utils.isRTL()) {
                     rootLayout.setPadding(paddingHorizontal1, paddingVertical, paddingNoIcon, paddingVertical);
                 } else {
                     rootLayout.setPadding(paddingNoIcon, paddingVertical, paddingHorizontal1, paddingVertical);
@@ -228,13 +227,12 @@ public class StyleableToast extends LinearLayout {
             return;
         }
 
-        int defaultBackgroundColor = StyleableToastUtils.isOreo() ? R.color.default_background_color_oreo : R.color.default_background_color;
-        int defaultCornerRadius = (int) getResources().getDimension(StyleableToastUtils.isOreo() ? R.dimen.default_corner_radius_oreo : R.dimen.default_corner_radius);
+        int defaultBackgroundColor = ContextCompat.getColor(getContext(), Utils.isOreo() ? R.color.default_background_color_oreo : R.color.default_background_color);
+        int defaultCornerRadius = (int) getResources().getDimension(Utils.isOreo() ? R.dimen.default_corner_radius_oreo : R.dimen.default_corner_radius);
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
-        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), defaultBackgroundColor));
+        backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, defaultBackgroundColor);
         cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, defaultCornerRadius);
-
 
         if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
             length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
@@ -251,7 +249,6 @@ public class StyleableToast extends LinearLayout {
             return;
         }
 
-        //TODO TEST THIS
         textColor = typedArray.getColor(R.styleable.StyleableToast_textColor, textView.getCurrentTextColor());
         textBold = typedArray.getBoolean(R.styleable.StyleableToast_textBold, false);
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
@@ -331,7 +328,7 @@ public class StyleableToast extends LinearLayout {
         }
 
         public Builder stroke(int strokeWidth, @ColorInt int strokeColor) {
-            this.strokeWidth = strokeWidth;
+            this.strokeWidth = Utils.toDp(context, strokeWidth);
             this.strokeColor = strokeColor;
             return this;
         }
@@ -340,7 +337,7 @@ public class StyleableToast extends LinearLayout {
          * @param cornerRadius Sets the corner radius of the StyleableToast's shape.
          */
         public Builder cornerRadius(int cornerRadius) {
-            this.cornerRadius = StyleableToastUtils.toDp(context, cornerRadius);
+            this.cornerRadius = Utils.toDp(context, cornerRadius);
             return this;
         }
 
@@ -384,6 +381,5 @@ public class StyleableToast extends LinearLayout {
             styleableToast = new StyleableToast(this);
             styleableToast.show();
         }
-
     }
 }

@@ -66,6 +66,11 @@
                 <Button
                     android:id="@+id/b9"
                     style="@style/DemoButton"
+                    android:text="Colored stroke" />
+
+                <Button
+                    android:id="@+id/b10"
+                    style="@style/DemoButton"
                     android:text="All styles" />
             </LinearLayout>
         </LinearLayout>
