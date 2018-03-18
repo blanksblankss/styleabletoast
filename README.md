@@ -5,11 +5,8 @@
 
 An Android library that takes the standard toast to the next level with many styling options. Style your toasts either by code or define styles in styles.xml. See examples below or try the demo app.
 
-### New in 2.0.2
-* int arguments in `cornerRadius(int radius)` and `stroke(width, color)` is now converted to `DP` by the library
-
-> ### Release notes
->   Version 2.0.2
+> ### Release notes: *version 2.0.2*
+>   
 > - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
 
 
