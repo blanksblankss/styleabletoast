@@ -16,6 +16,7 @@ import android.support.annotation.StyleRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.TextViewCompat;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -39,7 +40,7 @@ import android.widget.Toast;
 //TODO -- Test default values from XML and builder pattern for Android O
 //TODO -- Add Gravity method
 //TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
-//TODO -- FIX default bagrundcolor and default alpha for android o style
+//TODO -- Fix oversized toast when icon is added
 
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
@@ -133,13 +134,13 @@ public class StyleableToast extends LinearLayout {
     private void makeShape() {
         loadShapeAttributes();
         GradientDrawable gradientDrawable = (GradientDrawable) rootLayout.getBackground().mutate();
-        gradientDrawable.setAlpha(R.integer.defaultBackgroundAlpha);
+        gradientDrawable.setAlpha(getResources().getInteger(R.integer.defaultBackgroundAlpha));
 
         if (strokeWidth > 0) {
             gradientDrawable.setStroke(StyleableToastUtils.toDp(getContext(), strokeWidth), strokeColor);
         }
         if (cornerRadius > -1) {
-            gradientDrawable.setCornerRadius(StyleableToastUtils.toDp(getContext(), cornerRadius));
+            gradientDrawable.setCornerRadius(cornerRadius);
         }
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
@@ -228,11 +229,12 @@ public class StyleableToast extends LinearLayout {
         }
 
         int defaultBackgroundColor = StyleableToastUtils.isOreo() ? R.color.default_background_color_oreo : R.color.default_background_color;
-        int defaultCornerRadius = StyleableToastUtils.isOreo() ? R.dimen.default_corner_radius_oreo : R.dimen.default_corner_radius;
+        int defaultCornerRadius = (int) getResources().getDimension(StyleableToastUtils.isOreo() ? R.dimen.default_corner_radius_oreo : R.dimen.default_corner_radius);
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
         backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, ContextCompat.getColor(getContext(), defaultBackgroundColor));
-        cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, getResources().getDimension(defaultCornerRadius));
+        cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, defaultCornerRadius);
+
 
         if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
             length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
@@ -338,7 +340,7 @@ public class StyleableToast extends LinearLayout {
          * @param cornerRadius Sets the corner radius of the StyleableToast's shape.
          */
         public Builder cornerRadius(int cornerRadius) {
-            this.cornerRadius = cornerRadius;
+            this.cornerRadius = StyleableToastUtils.toDp(context, cornerRadius);
             return this;
         }
 

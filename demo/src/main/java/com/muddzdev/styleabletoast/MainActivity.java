@@ -3,6 +3,7 @@ package com.muddzdev.styleabletoast;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
@@ -23,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.b1)
     public void coloredBackground() {
-        new StyleableToast.Builder(this)
-                .text(toastMsg)
-//                .backgroundColor(Color.parseColor("#E55F63"))
-                .show();
+
+        StyleableToast.makeText(this, toastMsg, R.style.style2).show();
+
+//        new StyleableToast.Builder(this)
+//                .text(toastMsg)
+//                .show();
     }
 
     @OnClick(R.id.b2)
