@@ -32,7 +32,7 @@ An Android library that takes the standard toast to the next level with many sty
         <item name="strokeColor">#fff</item>    API 21+
         <item name="iconLeft">@drawable/ic</item>
         <item name="iconRight">@drawable/ic</item>
-        <item name="length">LONG</item>         ENUM: LONG | SHORT
+        <item name="length">LONG</item> LONG or SHORT
         <item name="cornerRadius">5dp</item>
     </style>
 
