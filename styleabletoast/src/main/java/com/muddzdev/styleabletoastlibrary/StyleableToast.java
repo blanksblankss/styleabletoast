@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -39,7 +40,6 @@ import android.widget.Toast;
 //TODO -- Add Gravity method
 //TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
 //TODO -- Fix oversized toast when icon is added
-//TODO -- Make dimens, color and integer values for 27 api -> instead of adding them in the same file with oreo postfix!
 
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
@@ -119,6 +119,7 @@ public class StyleableToast extends LinearLayout {
         styleableToast = new Toast(getContext());
         styleableToast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         styleableToast.setView(rootLayout);
+        styleableToast.setGravity(Gravity.TOP,0,styleableToast.getYOffset());
         styleableToast.show();
     }
 
@@ -144,7 +145,6 @@ public class StyleableToast extends LinearLayout {
         if (backgroundColor != 0) {
             gradientDrawable.setColor(backgroundColor);
         }
-
         if (solidBackground) {
             gradientDrawable.setAlpha(getResources().getInteger(R.integer.fullBackgroundAlpha));
         }
@@ -227,8 +227,8 @@ public class StyleableToast extends LinearLayout {
             return;
         }
 
-        int defaultBackgroundColor = ContextCompat.getColor(getContext(), Utils.isOreo() ? R.color.default_background_color_oreo : R.color.default_background_color);
-        int defaultCornerRadius = (int) getResources().getDimension(Utils.isOreo() ? R.dimen.default_corner_radius_oreo : R.dimen.default_corner_radius);
+        int defaultBackgroundColor = ContextCompat.getColor(getContext(), R.color.default_background_color);
+        int defaultCornerRadius = (int) getResources().getDimension(R.dimen.default_corner_radius);
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
         backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, defaultBackgroundColor);

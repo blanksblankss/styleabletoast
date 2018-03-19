@@ -3,8 +3,4 @@
 
     <color name="default_background_color">#555555</color>
     <color name="default_text_color">#ffffff</color>
-
-    <color name="default_background_color_oreo">#EEEEEE</color>
-    <color name="default_text_color_oreo">#de000000</color>
-
 </resources>

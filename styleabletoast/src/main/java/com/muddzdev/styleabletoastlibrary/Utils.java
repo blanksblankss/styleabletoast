@@ -19,10 +19,6 @@ class Utils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, value, context.getResources().getDisplayMetrics());
     }
 
-    static boolean isOreo() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
-    }
-
     static boolean isRTL() {
         return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
     }

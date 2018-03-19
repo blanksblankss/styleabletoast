@@ -26,18 +26,22 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.b1)
     public void coloredBackground() {
-        new StyleableToast.Builder(this)
-                .text(toastMsg)
-                .backgroundColor(toastColor)
-                .show();
+
+        StyleableToast.makeText(this,toastMsg,R.style.style2).show();
+
+//        new StyleableToast.Builder(this)
+//                .text(toastMsg)
+//                .backgroundColor(toastColor)
+//                .show();
     }
 
     @OnClick(R.id.b2)
     public void coloredText() {
-        new StyleableToast.Builder(this)
-                .text(toastMsg)
-                .textColor(toastColor)
-                .show();
+        StyleableToast.makeText(this,toastMsg,R.style.style3).show();
+//        new StyleableToast.Builder(this)
+//                .text(toastMsg)
+//                .textColor(toastColor)
+//                .show();
     }
 
     @OnClick(R.id.b3)

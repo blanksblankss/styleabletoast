@@ -16,7 +16,7 @@
         android:gravity="center"
         android:paddingHorizontal="24dp"
         android:paddingVertical="15dp"
-        android:textColor="@color/default_text_color_oreo"
-        android:textSize="@dimen/default_text_size_oreo"
+        android:textColor="@color/default_text_color"
+        android:textSize="@dimen/default_text_size"
         tools:text="Hello World" />
 </LinearLayout>

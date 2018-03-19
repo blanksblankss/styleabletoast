@@ -33,5 +33,9 @@
 
     </style>
 
+    <style name="style3">
+        <item name="colorBackground">#ff00</item>
+
+    </style>
 
 </resources>
