@@ -38,7 +38,6 @@ import android.widget.Toast;
 //        limitations under the License.
 
 //TODO -- Add Gravity method
-//TODO -- Test everything with Android 0 phones and Android phone above 21 and below 21
 //TODO -- Fix oversized toast when icon is added
 
 @SuppressLint("ViewConstructor")
@@ -51,7 +50,7 @@ public class StyleableToast extends LinearLayout {
     private int iconStart;
     private int iconEnd;
     private int textColor;
-    private int fontId;
+    private int font;
     private int length;
     private int style;
     private float textSize;
@@ -61,6 +60,7 @@ public class StyleableToast extends LinearLayout {
     private String text;
     private TypedArray typedArray;
     private TextView textView;
+    private int gravity;
     private Toast styleableToast;
     private LinearLayout rootLayout;
 
@@ -91,8 +91,9 @@ public class StyleableToast extends LinearLayout {
         this.textColor = builder.textColor;
         this.textSize = builder.textSize;
         this.textBold = builder.textBold;
-        this.fontId = builder.fontId;
+        this.font = builder.font;
         this.text = builder.text;
+        this.gravity = builder.gravity;
         this.length = builder.length;
     }
 
@@ -117,9 +118,9 @@ public class StyleableToast extends LinearLayout {
     public void show() {
         initStyleableToast();
         styleableToast = new Toast(getContext());
+        styleableToast.setGravity(gravity == 0 ? styleableToast.getGravity() : gravity, 0, styleableToast.getYOffset());
         styleableToast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
         styleableToast.setView(rootLayout);
-        styleableToast.setGravity(Gravity.TOP,0,styleableToast.getYOffset());
         styleableToast.show();
     }
 
@@ -161,10 +162,10 @@ public class StyleableToast extends LinearLayout {
         if (textSize > 0) {
             textView.setTextSize(isTextSizeFromStyleXml ? 0 : TypedValue.COMPLEX_UNIT_SP, textSize);
         }
-        if (fontId > 0) {
-            textView.setTypeface(ResourcesCompat.getFont(getContext(), fontId), textBold ? Typeface.BOLD : Typeface.NORMAL);
+        if (font > 0) {
+            textView.setTypeface(ResourcesCompat.getFont(getContext(), font), textBold ? Typeface.BOLD : Typeface.NORMAL);
         }
-        if (textBold && fontId == 0) {
+        if (textBold && font == 0) {
             textView.setTypeface(textView.getTypeface(), Typeface.BOLD);
         }
     }
@@ -232,11 +233,8 @@ public class StyleableToast extends LinearLayout {
 
         solidBackground = typedArray.getBoolean(R.styleable.StyleableToast_solidBackground, false);
         backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, defaultBackgroundColor);
-        cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_cornerRadius, defaultCornerRadius);
-
-        if (typedArray.hasValue(R.styleable.StyleableToast_length)) {
-            length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
-        }
+        cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_radius, defaultCornerRadius);
+        length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
 
         if (typedArray.hasValue(R.styleable.StyleableToast_strokeColor) && typedArray.hasValue(R.styleable.StyleableToast_strokeWidth)) {
             strokeWidth = (int) typedArray.getDimension(R.styleable.StyleableToast_strokeWidth, 0);
@@ -252,7 +250,7 @@ public class StyleableToast extends LinearLayout {
         textColor = typedArray.getColor(R.styleable.StyleableToast_textColor, textView.getCurrentTextColor());
         textBold = typedArray.getBoolean(R.styleable.StyleableToast_textBold, false);
         textSize = typedArray.getDimension(R.styleable.StyleableToast_textSize, 0);
-        fontId = typedArray.getResourceId(R.styleable.StyleableToast_textFont, 0);
+        font = typedArray.getResourceId(R.styleable.StyleableToast_font, 0);
         isTextSizeFromStyleXml = textSize > 0;
     }
 
@@ -273,12 +271,13 @@ public class StyleableToast extends LinearLayout {
         private int iconStart;
         private int iconEnd;
         private int textColor;
-        private int fontId;
+        private int font;
         private int length;
         private float textSize;
         private boolean solidBackground;
         private boolean textBold;
         private String text;
+        private int gravity;
         private StyleableToast styleableToast;
         private final Context context;
 
@@ -310,7 +309,7 @@ public class StyleableToast extends LinearLayout {
          * @param font A font resource id like R.font.somefont as introduced with the new font api in Android 8
          */
         public Builder font(@FontRes int font) {
-            this.fontId = font;
+            this.font = font;
             return this;
         }
 
@@ -341,24 +340,6 @@ public class StyleableToast extends LinearLayout {
             return this;
         }
 
-        @Deprecated
-        /**
-         * Replaced with iconStart() for better naming for RTL support
-         */
-        public Builder iconResLeft(@DrawableRes int iconResLeft) {
-            this.iconStart = iconResLeft;
-            return this;
-        }
-
-        @Deprecated
-        /**
-         * Replaced with iconEnd() for better naming for RTL support
-         */
-        public Builder iconResRight(@DrawableRes int iconResRight) {
-            this.iconEnd = iconResRight;
-            return this;
-        }
-
         public Builder iconStart(@DrawableRes int iconStart) {
             this.iconStart = iconStart;
             return this;
@@ -366,6 +347,14 @@ public class StyleableToast extends LinearLayout {
 
         public Builder iconEnd(@DrawableRes int iconEnd) {
             this.iconEnd = iconEnd;
+            return this;
+        }
+
+        /**
+         * Sets where the StyleableToast will appear on the screen
+         */
+        public Builder gravity(int gravity) {
+            this.gravity = gravity;
             return this;
         }
 

@@ -182,21 +182,27 @@ public class MainActivity extends AppCompatActivity {
 
     //--------------------------------------------------
 
-    //TODO
-
     @OnClick(R.id.b10)
     public void allStyles() {
         new StyleableToast.Builder(this)
                 .text(toastMsg)
-                .stroke(2, Color.YELLOW)
+                .stroke(2, Color.CYAN)
+                .backgroundColor(Color.BLACK)
+                .solidBackground()
+                .textColor(Color.YELLOW)
+                .textBold()
+                .font(R.font.dosis)
+                .iconStart(R.drawable.ic_airplanemode_inactive_black_24dp)
+                .iconEnd(R.drawable.ic_airplanemode_inactive_black_24dp)
+                .cornerRadius(12)
+                .textSize(18)
                 .show();
     }
 
-    //TODO
+
     @OnLongClick(R.id.b10)
     public boolean allStylesStyles() {
         StyleableToast.makeText(this, toastMsg, R.style.AllStyles).show();
-
         return true;
     }
 

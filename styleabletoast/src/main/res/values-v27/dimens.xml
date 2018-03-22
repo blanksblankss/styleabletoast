@@ -4,4 +4,8 @@
     <dimen name="default_text_size">14sp</dimen>
     <dimen name="default_corner_radius">22dp</dimen>
 
+    <dimen name="toast_horizontal_padding">24dp</dimen>
+    <dimen name="toast_vertical_padding">15dp</dimen>
+    <dimen name="toast_horizontal_padding_empty_side">26dp</dimen>
+
 </resources>
