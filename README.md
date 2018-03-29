@@ -3,7 +3,7 @@
 [![APK](https://img.shields.io/badge/APK-Demo-brightgreen.svg)](https://github.com/Muddz/StyleableToast/raw/master/demo.apk)
 [![LICENSE](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://github.com/Muddz/StyleableToast/blob/master/LICENSE)
 
-An Android library that takes the standard toast to the next level with many styling options. Style your toasts either by code or define styles in styles.xml. See examples below or try the demo app.
+An Android library that takes the standard toast to the next level with many styling options. Style your toasts either by code or with a style in styles.xml. See examples below or try the demo app.
 
 
 
@@ -50,7 +50,7 @@ An Android library that takes the standard toast to the next level with many sty
 Or
 
 ```java
-    StyleableToast.makeText(context, "Hello World!", Toast.LENGTH_LONG,R.style.mytoast).show();
+    StyleableToast.makeText(context, "Hello World!", Toast.LENGTH_LONG, R.style.mytoast).show();
 ```
 
 ## Example with builder pattern:
