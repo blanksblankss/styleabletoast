@@ -33,8 +33,8 @@ An Android library that takes the standard toast to the next level with many sty
         <item name="solidBackground">true</item>
         <item name="strokeWidth">3dp</item>
         <item name="strokeColor">#fff</item>
-        <item name="iconLeft">@drawable/ic</item>
-        <item name="iconRight">@drawable/ic</item>
+        <item name="iconStart">@drawable/ic</item>
+        <item name="iconEnd">@drawable/ic</item>
         <item name="length">LONG</item> LONG or SHORT
         <item name="gravity">top</item> top or center
         <item name="cornerRadius">5dp</item>
