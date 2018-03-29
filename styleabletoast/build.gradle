@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
-version = "2.0.2"
+version = "2.1.2"
 
 android {
     compileSdkVersion 27
@@ -111,7 +111,7 @@ bintray {
         licenses = ["Apache-2.0"]
         version {
             gpg {
-                name = "2.0.2"
+                name = "2.1.2"
             }
         }
     }
