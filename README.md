@@ -7,9 +7,12 @@ An Android library that takes the standard toast to the next level with many sty
 
 
 
-> ### Release notes: version 2.0.2
->   
-> - Int arguments for `cornerRadius(int radius)` and `stroke(int width)` is now converted to `DIP` by the library 
+> ### Release notes: version 2.1.2
+> - `iconLeft()` and `iconRight()` replaced with `iconStart()` and `iconEnd()` for RTL suppprt.
+> - Support for the new Android Toast in API >=27 (Oero)
+> - Replaced `textFont` attribute with `font` in `styles.xml` which is closer to SDK naming
+> - Replaced `cornerRadius` attribute with `radius`
+> - Added Gravity support
 
 
 ## Cases:
@@ -24,15 +27,16 @@ An Android library that takes the standard toast to the next level with many sty
     <style name="mytoast">
         <item name="textBold">true</item>
         <item name="textColor">#fff</item>
-        <item name="textFont">@font/dosier</item>
+        <item name="font">@font/retrofont</item>
         <item name="textSize">14sp</item>
         <item name="colorBackground">#fff</item>
         <item name="solidBackground">true</item>
-        <item name="strokeWidth">3dp</item>     API 21+
-        <item name="strokeColor">#fff</item>    API 21+
+        <item name="strokeWidth">3dp</item>
+        <item name="strokeColor">#fff</item>
         <item name="iconLeft">@drawable/ic</item>
         <item name="iconRight">@drawable/ic</item>
         <item name="length">LONG</item> LONG or SHORT
+        <item name="gravity">top</item> top or center
         <item name="cornerRadius">5dp</item>
     </style>
 
@@ -42,6 +46,11 @@ An Android library that takes the standard toast to the next level with many sty
 
 ```java
     StyleableToast.makeText(context, "Hello World!", R.style.mytoast).show();
+```
+Or
+
+```java
+    StyleableToast.makeText(context, "Hello World!", Toast.LENGTH_LONG,R.style.mytoast).show();
 ```
 
 ## Example with builder pattern:
@@ -60,7 +69,7 @@ An Android library that takes the standard toast to the next level with many sty
 Add the depedency in your `build.gradle`
 ```groovy
 dependencies {
-    implementation 'com.muddzdev:styleabletoast:2.0.2'   
+    implementation 'com.muddzdev:styleabletoast:2.1.2'   
 }
 ```
 
