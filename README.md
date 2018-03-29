@@ -8,7 +8,7 @@ An Android library that takes the standard toast to the next level with many sty
 
 
 > ### Release notes: version 2.1.2
-> - `iconLeft()` and `iconRight()` replaced with `iconStart()` and `iconEnd()` for RTL suppprt.
+> - `iconLeft()` and `iconRight()` renamed with `iconStart()` and `iconEnd()` for RTL suppprt.
 > - Support for the new Android Toast in API >=27 (Oero)
 > - Replaced `textFont` attribute with `font` in `styles.xml` which is closer to SDK naming
 > - Replaced `cornerRadius` attribute with `radius`
