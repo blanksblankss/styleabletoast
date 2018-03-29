@@ -40,6 +40,7 @@
 
     <style name="coloredBackground" parent="BaseStyleableToast">
         <item name="colorBackground">#FF5A5F</item>
+        <item name="gravity">top</item>
     </style>
 
     <style name="coloredText" parent="BaseStyleableToast">

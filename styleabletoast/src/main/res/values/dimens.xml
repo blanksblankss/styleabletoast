@@ -4,7 +4,7 @@
     <dimen name="default_corner_radius">30dp</dimen>
 
     <!--These two are only used when an Icon is applied to the StyleableToast-->
-    <dimen name="toast_horizontal_padding_icon_side">20dp</dimen>
+    <dimen name="toast_horizontal_padding_icon_side">22dp</dimen>
     <dimen name="toast_horizontal_padding_empty_side">22dp</dimen>
 
     <dimen name="toast_horizontal_padding">25dp</dimen>

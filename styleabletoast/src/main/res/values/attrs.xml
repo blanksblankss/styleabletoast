@@ -17,5 +17,10 @@
             <enum name="LONG" value="1" />
             <enum name="SHORT" value="0" />
         </attr>
+        <attr name="gravity" format="integer">
+            <enum name="center" value="1" />
+            <enum name="top" value="2" />
+        </attr>
+
     </declare-styleable>
 </resources>

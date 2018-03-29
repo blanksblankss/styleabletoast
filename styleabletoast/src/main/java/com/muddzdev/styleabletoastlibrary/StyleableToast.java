@@ -38,12 +38,11 @@ import android.widget.Toast;
 //        limitations under the License.
 
 //TODO -- Add Gravity method
-//TODO -- Fix oversized toast when icon is added
 
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
 
-    private int cornerRadius = -1;
+    private int cornerRadius;
     private int backgroundColor;
     private int strokeColor;
     private int strokeWidth;
@@ -61,7 +60,7 @@ public class StyleableToast extends LinearLayout {
     private TypedArray typedArray;
     private TextView textView;
     private int gravity;
-    private Toast styleableToast;
+    private Toast toast;
     private LinearLayout rootLayout;
 
     public static StyleableToast makeText(@NonNull Context context, String text, int length, @StyleRes int style) {
@@ -117,17 +116,17 @@ public class StyleableToast extends LinearLayout {
 
     public void show() {
         initStyleableToast();
-        styleableToast = new Toast(getContext());
-        styleableToast.setGravity(gravity == 0 ? styleableToast.getGravity() : gravity, 0, styleableToast.getYOffset());
-        styleableToast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
-        styleableToast.setView(rootLayout);
-        styleableToast.show();
+        toast = new Toast(getContext());
+        toast.setGravity(gravity, 0, gravity == Gravity.CENTER ? 0 : toast.getYOffset());
+        toast.setDuration(length == Toast.LENGTH_LONG ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
+        toast.setView(rootLayout);
+        toast.show();
     }
 
 
     public void cancel() {
-        if (styleableToast != null) {
-            styleableToast.cancel();
+        if (toast != null) {
+            toast.cancel();
         }
     }
 
@@ -173,9 +172,6 @@ public class StyleableToast extends LinearLayout {
 
     private void makeIcon() {
         loadIconAttributes();
-
-        //TODO MAKE VERTICAL AND HORIZONTAL VALUES FOR ANDROID 0!!!!
-
         int paddingVertical = (int) getResources().getDimension(R.dimen.toast_vertical_padding);
         int paddingHorizontal1 = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_icon_side);
         int paddingNoIcon = (int) getResources().getDimension(R.dimen.toast_horizontal_padding_empty_side);
@@ -235,6 +231,13 @@ public class StyleableToast extends LinearLayout {
         backgroundColor = typedArray.getColor(R.styleable.StyleableToast_colorBackground, defaultBackgroundColor);
         cornerRadius = (int) typedArray.getDimension(R.styleable.StyleableToast_radius, defaultCornerRadius);
         length = typedArray.getInt(R.styleable.StyleableToast_length, 0);
+        gravity = typedArray.getInt(R.styleable.StyleableToast_gravity, Gravity.BOTTOM);
+
+        if (gravity == 1) {
+            gravity = Gravity.CENTER;
+        } else if (gravity == 2) {
+            gravity = Gravity.TOP;
+        }
 
         if (typedArray.hasValue(R.styleable.StyleableToast_strokeColor) && typedArray.hasValue(R.styleable.StyleableToast_strokeWidth)) {
             strokeWidth = (int) typedArray.getDimension(R.styleable.StyleableToast_strokeWidth, 0);
@@ -277,8 +280,8 @@ public class StyleableToast extends LinearLayout {
         private boolean solidBackground;
         private boolean textBold;
         private String text;
-        private int gravity;
-        private StyleableToast styleableToast;
+        private int gravity = Gravity.BOTTOM;
+        private StyleableToast toast;
         private final Context context;
 
         public Builder(@NonNull Context context) {
@@ -367,8 +370,8 @@ public class StyleableToast extends LinearLayout {
         }
 
         public void show() {
-            styleableToast = new StyleableToast(this);
-            styleableToast.show();
+            toast = new StyleableToast(this);
+            toast.show();
         }
     }
 }
