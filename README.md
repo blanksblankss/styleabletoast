@@ -46,7 +46,11 @@ An Android library that takes the standard toast to the next level with many sty
 
 ```java
     StyleableToast.makeText(context, "Hello World!", R.style.mytoast).show();
-    // or
+```
+
+or
+
+```java
     StyleableToast.makeText(context, "Hello World!", Toast.LENGTH_LONG, R.style.mytoast).show();
 ```
 
