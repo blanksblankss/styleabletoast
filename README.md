@@ -37,7 +37,7 @@ An Android library that takes the standard toast to the next level with many sty
         <item name="iconEnd">@drawable/ic</item>
         <item name="length">LONG</item> LONG or SHORT
         <item name="gravity">top</item> top or center
-        <item name="cornerRadius">5dp</item>
+        <item name="radius">5dp</item>
     </style>
 
 ```
