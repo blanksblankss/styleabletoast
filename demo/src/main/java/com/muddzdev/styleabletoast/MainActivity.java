@@ -3,9 +3,6 @@ package com.muddzdev.styleabletoast;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Gravity;
-import android.widget.Toast;
 
 import com.muddzdev.styleabletoastlibrary.StyleableToast;
 
@@ -16,7 +13,7 @@ import butterknife.OnLongClick;
 public class MainActivity extends AppCompatActivity {
 
     String toastMsg = "Hello World!";
-    int toastColor = Color.parseColor("#FF5A5F");
+    int redColor = Color.parseColor("#FF5A5F");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +28,7 @@ public class MainActivity extends AppCompatActivity {
     public void coloredBackground() {
         new StyleableToast.Builder(this)
                 .text(toastMsg)
-                .gravity(Gravity.TOP)
-                .backgroundColor(toastColor)
+                .backgroundColor(redColor)
                 .show();
     }
 
@@ -48,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     public void coloredText() {
         new StyleableToast.Builder(this)
                 .text(toastMsg)
-                .textColor(toastColor)
+                .textColor(redColor)
                 .show();
     }
 
@@ -64,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void coloredBoldText() {
         new StyleableToast.Builder(this)
                 .text(toastMsg)
-                .textColor(toastColor)
+                .textColor(redColor)
                 .textBold()
                 .show();
     }
@@ -127,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
     //--------------------------------------------------
 
     @OnClick(R.id.b7)
@@ -171,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
     public void coloredStroke() {
         new StyleableToast.Builder(this)
                 .text(toastMsg)
-                .stroke(2, Color.YELLOW)
+                .stroke(2, redColor)
                 .show();
     }
 
@@ -207,6 +202,4 @@ public class MainActivity extends AppCompatActivity {
         StyleableToast.makeText(this, toastMsg, R.style.AllStyles).show();
         return true;
     }
-
-
 }

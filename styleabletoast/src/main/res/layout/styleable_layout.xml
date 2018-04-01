@@ -17,8 +17,6 @@
         android:drawablePadding="@dimen/drawable_padding"
         android:fontFamily="sans-serif-condensed"
         android:gravity="center"
-        android:shadowColor="#BB000000"
-        android:shadowRadius="2.75"
         android:textColor="@color/default_text_color"
         android:textSize="@dimen/default_text_size"
         tools:text="Hello World" />
