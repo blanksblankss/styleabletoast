@@ -37,8 +37,6 @@ import android.widget.Toast;
 //        See the License for the specific language governing permissions and
 //        limitations under the License.
 
-//TODO -- Add Gravity method
-
 @SuppressLint("ViewConstructor")
 public class StyleableToast extends LinearLayout {
 
