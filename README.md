@@ -1,7 +1,6 @@
 ## Android StyleableToast
 [![](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16#l16)
 [![APK](https://img.shields.io/badge/Download-Demo-brightgreen.svg)](https://github.com/Muddz/StyleableToast/raw/master/demo.apk)
-[![LICENSE](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://github.com/Muddz/StyleableToast/blob/master/LICENSE)
 
 An Android library that takes the standard toast to the next level with many styling options. Style your toasts either by code or with a style in styles.xml. See examples below or try the demo app.
 
